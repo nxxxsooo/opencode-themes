@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://nxxxsooo.github.io/opencode-themes"><img src="https://img.shields.io/badge/🌐_Landing_Page-Visit-8a6cc4?style=flat-square" alt="Landing Page" /></a>
+  <a href="https://mjshao.fun/opencode-themes/"><img src="https://img.shields.io/badge/🌐_Landing_Page-Visit-8a6cc4?style=flat-square" alt="Landing Page" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/nxxxsooo/opencode-themes?style=flat-square&color=5fd4bb" alt="License" /></a>
   <a href="https://github.com/nxxxsooo/opencode-themes/stargazers"><img src="https://img.shields.io/github/stars/nxxxsooo/opencode-themes?style=flat-square&color=f0a830" alt="Stars" /></a>
 </p>
