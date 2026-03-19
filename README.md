@@ -99,6 +99,25 @@ PingFang SC / Noto Sans SC for beautiful Chinese/Japanese/Korean text.
 3. Copy `opencode.css` into the theme folder
 4. Restart Typora and select **OpenCode** from the theme menu
 
+### 🤖 For AI Agents (One-liner)
+
+```bash
+# Obsidian
+VAULT="$(find ~/Library/Application\ Support/obsidian -name '.obsidian' -maxdepth 3 2>/dev/null | head -1)" && \
+mkdir -p "$VAULT/themes/OpenCode" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/obsidian-opencode-theme/main/theme.css -o "$VAULT/themes/OpenCode/theme.css" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/obsidian-opencode-theme/main/manifest.json -o "$VAULT/themes/OpenCode/manifest.json" && \
+echo "✅ Obsidian OpenCode theme installed"
+
+# Typora
+TYPORA_THEMES="$(find ~/Library/Application\ Support/abnerworks.Typora/themes -maxdepth 0 2>/dev/null || echo '')" && \
+[ -n "$TYPORA_THEMES" ] && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/typora-opencode-theme/main/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
+echo "✅ Typora OpenCode theme installed"
+```
+
+> macOS paths shown. On Linux/Windows, adjust vault/theme folder paths accordingly.
+
 ---
 
 ## Typography
