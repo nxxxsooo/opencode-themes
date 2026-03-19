@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OpenCode Theme Showcase — See every markdown element styled with the OpenCode dark theme.">
+  <meta name="theme-color" content="#0d1117">
+  <title>Showcase — OpenCode Theme for Typora</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       Design Tokens (matching opencode.css)
+       ============================================================ */
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #1c2128;
+      --bg-elevated: #21262d;
+      --border: #30363d;
+      --border-hover: #484f58;
+
+      --text: #f0f6fc;
+      --text-secondary: #e6edf3;
+      --text-muted: #9ca3af;
+      --text-faint: #7c838d;
+
+      --accent: #8a6cc4;
+      --accent-hover: #9b80d1;
+      --accent-rgb: 138, 108, 196;
+
+      --purple: #d19af8;
+      --cyan: #5fd4bb;
+      --blue: #7aa2f7;
+      --green: #9ece6a;
+      --yellow: #e0af68;
+      --orange: #ff9e64;
+      --red: #f7768e;
+      --pink: #ff79c6;
+      --sky: #89ddff;
+      --gold: #e5a030;
+
+      --code-bg: #161b22;
+      --code-text: #f0f6fc;
+      --code-comment: #8b949e;
+      --code-keyword: #d19af8;
+      --code-string: #9ece6a;
+      --code-function: #8a6cc4;
+      --code-property: #5fd4bb;
+      --code-operator: #89ddff;
+      --code-value: #ff9e64;
+      --code-tag: #f7768e;
+      --code-punctuation: #f0f6fc;
+
+      --radius-s: 4px;
+      --radius-m: 8px;
+      --radius-l: 12px;
+
+      --font-sans: "Noto Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+
+    /* ============================================================
+       Reset
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.8;
+    }
+
+    ::selection {
+      background: rgba(122, 162, 247, 0.3);
+    }
+
+    /* ============================================================
+       Layout — Typora-like editor frame
+       ============================================================ */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1rem 0;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sidebar-item {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .sidebar-item.active {
+      background: var(--bg-elevated);
+      color: var(--blue);
+      border-left: 3px solid var(--accent);
+      padding-left: calc(1.25rem - 3px);
+    }
+
+    .sidebar-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+      transition: background 0.15s;
+    }
+
+    .sidebar-back:hover {
+      background: var(--bg-tertiary);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .editor { margin: 0; }
+    }
+
+    /* Editor */
+    .editor {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .titlebar-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .titlebar-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .titlebar-dot.r { background: var(--red); }
+    .titlebar-dot.y { background: var(--yellow); }
+    .titlebar-dot.g { background: var(--green); }
+
+    .titlebar-name {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Write area — mirrors Typora's #write */
+    .write {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 48px 32px 96px;
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.01em;
+      font-weight: 450;
+    }
+
+    /* ============================================================
+       Headings
+       ============================================================ */
+    .write h1, .write h2, .write h3,
+    .write h4, .write h5, .write h6 {
+      color: var(--purple);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      margin: 1.6em 0 0.8em;
+    }
+
+    .write h1 {
+      font-size: 2.2em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35em;
+    }
+
+    .write h2 { font-size: 1.7em; }
+    .write h3 { font-size: 1.35em; }
+    .write h4 { font-size: 1.15em; }
+    .write h5 { font-size: 1em; }
+    .write h6 { font-size: 0.9em; color: var(--text-muted); }
+
+    /* ============================================================
+       Paragraphs & Inline
+       ============================================================ */
+    .write p { margin: 1em 0; color: var(--text); }
+    .write strong, .write b { color: var(--gold); font-weight: 600; }
+    .write em { color: var(--purple); }
+    .write del { color: var(--text-faint); }
+
+    .write mark {
+      background: rgba(224, 175, 104, 0.4);
+      color: var(--text);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* ============================================================
+       Links
+       ============================================================ */
+    .write a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .write a:hover {
+      color: var(--accent-hover);
+      border-bottom-color: rgba(var(--accent-rgb), 0.5);
+    }
+
+    /* ============================================================
+       Blockquote
+       ============================================================ */
+    .write blockquote {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+      color: var(--text-secondary);
+    }
+    .write blockquote p { margin: 0.5em 0; }
+
+    /* ============================================================
+       Lists
+       ============================================================ */
+    .write ul, .write ol { padding-left: 1.8em; }
+    .write li { margin: 0.35em 0; }
+    .write li::marker { color: var(--purple); }
+
+    /* Task Lists */
+    .write .task-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .write .task-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5em;
+    }
+    .write .task-list input[type="checkbox"] {
+      accent-color: var(--accent);
+      transform: translateY(2px);
+    }
+    .write .task-done {
+      color: var(--text-faint);
+      text-decoration: line-through;
+    }
+
+    /* ============================================================
+       Horizontal Rule
+       ============================================================ */
+    .write hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2em 0;
+    }
+
+    /* ============================================================
+       Code — Inline
+       ============================================================ */
+    .write code {
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      padding: 2px 6px;
+      border-radius: var(--radius-s);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      font-weight: 450;
+    }
+
+    /* ============================================================
+       Code — Fenced Blocks
+       ============================================================ */
+    .write pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 16px;
+      margin: 1.2em 0;
+      overflow-x: auto;
+      line-height: 1.6;
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+    .write pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: var(--code-text);
+      font-size: inherit;
+    }
+
+    /* Syntax tokens */
+    .kw { color: var(--code-keyword); }
+    .fn { color: var(--code-function); }
+    .st { color: var(--code-string); }
+    .cm { color: var(--code-comment); font-style: italic; }
+    .pr { color: var(--code-property); }
+    .op { color: var(--code-operator); }
+    .vl { color: var(--code-value); }
+    .tg { color: var(--code-tag); }
+    .at { color: var(--code-property); }
+    .pc { color: var(--code-punctuation); }
+
+    /* ============================================================
+       Tables
+       ============================================================ */
+    .write table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.5em 0;
+      overflow: hidden;
+      border-radius: var(--radius-m);
+      border: 1px solid var(--border);
+    }
+    .write th {
+      background: var(--bg-tertiary);
+      color: var(--purple);
+      font-weight: 600;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .write td {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .write td:first-child {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .write tr:nth-child(even) td { background: var(--bg-primary); }
+    .write tr:nth-child(odd) td { background: var(--bg-secondary); }
+    .write tr:hover td { background: var(--bg-tertiary); }
+
+    /* ============================================================
+       Images
+       ============================================================ */
+    .write img {
+      max-width: 100%;
+      border-radius: var(--radius-m);
+      margin: 1em 0;
+    }
+
+    /* ============================================================
+       YAML Front Matter
+       ============================================================ */
+    .write .frontmatter {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      color: var(--text-muted);
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      margin-bottom: 2em;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       Footnotes
+       ============================================================ */
+    .write .footnote-ref {
+      color: var(--accent);
+      font-size: 0.85em;
+      vertical-align: super;
+      text-decoration: none;
+    }
+    .write .footnotes {
+      border-top: 1px solid var(--border);
+      margin-top: 3em;
+      padding-top: 1em;
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       Math
+       ============================================================ */
+    .write .math-block {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 1rem;
+      margin: 1em 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+
+    /* ============================================================
+       Element label badges
+       ============================================================ */
+    .element-label {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.03em;
+    }
+
+    /* ============================================================
+       Footer
+       ============================================================ */
+    .footer {
+      padding: 2rem 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 0.85rem;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--accent-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <a href="index.html" class="sidebar-back">← Back to Home</a>
+      <div class="sidebar-header">Showcase</div>
+      <a href="#frontmatter" class="sidebar-item">YAML Front Matter</a>
+      <a href="#headings" class="sidebar-item active">Headings</a>
+      <a href="#inline" class="sidebar-item">Inline Formatting</a>
+      <a href="#links" class="sidebar-item">Links</a>
+      <a href="#blockquotes" class="sidebar-item">Blockquotes</a>
+      <a href="#lists" class="sidebar-item">Lists</a>
+      <a href="#tasks" class="sidebar-item">Task Lists</a>
+      <a href="#code-inline" class="sidebar-item">Inline Code</a>
+      <a href="#code-blocks" class="sidebar-item">Code Blocks</a>
+      <a href="#tables" class="sidebar-item">Tables</a>
+      <a href="#hr" class="sidebar-item">Horizontal Rule</a>
+      <a href="#math" class="sidebar-item">Math</a>
+      <a href="#footnotes" class="sidebar-item">Footnotes</a>
+    </nav>
+
+    <!-- Editor -->
+    <div class="editor">
+      <div class="titlebar">
+        <div class="titlebar-dots">
+          <div class="titlebar-dot r"></div>
+          <div class="titlebar-dot y"></div>
+          <div class="titlebar-dot g"></div>
+        </div>
+        <span class="titlebar-name">showcase.md — Typora (OpenCode Theme)</span>
+      </div>
+
+      <div class="write">
+        <!-- YAML Front Matter -->
+        <div id="frontmatter">
+          <span class="element-label">YAML Front Matter</span>
+          <div class="frontmatter"><span class="op">---</span>
+<span class="pr">title</span><span class="op">:</span> <span class="st">OpenCode Theme Showcase</span>
+<span class="pr">author</span><span class="op">:</span> <span class="st">nxxxsooo</span>
+<span class="pr">date</span><span class="op">:</span> <span class="st">2025-01-01</span>
+<span class="pr">tags</span><span class="op">:</span> <span class="pc">[</span><span class="st">typora</span><span class="op">,</span> <span class="st">theme</span><span class="op">,</span> <span class="st">dark-mode</span><span class="pc">]</span>
+<span class="op">---</span></div>
+        </div>
+
+        <!-- Headings -->
+        <div id="headings">
+          <span class="element-label">Headings</span>
+          <h1>Heading Level 1</h1>
+          <h2>Heading Level 2</h2>
+          <h3>Heading Level 3</h3>
+          <h4>Heading Level 4</h4>
+          <h5>Heading Level 5</h5>
+          <h6>Heading Level 6</h6>
+        </div>
+
+        <hr>
+
+        <!-- Inline Formatting -->
+        <div id="inline">
+          <span class="element-label">Inline Formatting</span>
+          <h2>Text Formatting</h2>
+          <p>This is regular paragraph text in the OpenCode theme. The font stack uses PingFang SC for beautiful CJK rendering, with a comfortable 1.8 line height.</p>
+          <p>Here is <strong>bold text styled in gold</strong> to make it stand out. And here is <em>italic text in purple</em> for emphasis. You can also use <del>strikethrough for deleted content</del>.</p>
+          <p>Highlighted text uses <mark>a warm amber background</mark> that catches attention without being harsh.</p>
+          <p>You can combine them: <strong><em>bold italic</em></strong>, or even <strong><em><del>bold italic strikethrough</del></em></strong>.</p>
+        </div>
+
+        <hr>
+
+        <!-- Links -->
+        <div id="links">
+          <span class="element-label">Links</span>
+          <h2>Links</h2>
+          <p>Visit the <a href="https://github.com/nxxxsooo/typora-opencode-theme">OpenCode Theme repository</a> on GitHub. Links have a subtle hover transition with an underline reveal.</p>
+          <p>Also check out the <a href="https://github.com/nxxxsooo/obsidian-opencode-theme">original Obsidian version</a>.</p>
+        </div>
+
+        <hr>
+
+        <!-- Blockquotes -->
+        <div id="blockquotes">
+          <span class="element-label">Blockquotes</span>
+          <h2>Blockquotes</h2>
+          <blockquote>
+            <p>The best error message is the one that never shows up.</p>
+            <p>— <strong>Thomas Fuchs</strong></p>
+          </blockquote>
+          <blockquote>
+            <p>Nested blockquotes work too. This is particularly useful for quoting conversations or multi-level citations in technical documentation.</p>
+            <blockquote>
+              <p>This is a nested blockquote — deeper context within a quote.</p>
+            </blockquote>
+          </blockquote>
+        </div>
+
+        <hr>
+
+        <!-- Lists -->
+        <div id="lists">
+          <span class="element-label">Lists</span>
+          <h2>Lists</h2>
+          <h3>Unordered List</h3>
+          <ul>
+            <li><strong>Tokyo Night Palette</strong> — Deep backgrounds with vibrant accents</li>
+            <li><strong>JetBrains Mono</strong> — Optimized monospace font for code
+              <ul>
+                <li>Ligature support enabled</li>
+                <li>Carefully tuned weight (450)</li>
+              </ul>
+            </li>
+            <li><strong>Full UI Coverage</strong> — Every element styled
+              <ul>
+                <li>Sidebar & file tree</li>
+                <li>Context menus & dialogs</li>
+                <li>Search panel & notifications</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>Ordered List</h3>
+          <ol>
+            <li>Download <code>opencode.css</code> from Releases</li>
+            <li>Open Typora → Preferences → Appearance</li>
+            <li>Click "Open Theme Folder"</li>
+            <li>Copy the CSS file into the folder</li>
+            <li>Restart Typora and select the theme</li>
+          </ol>
+        </div>
+
+        <hr>
+
+        <!-- Task Lists -->
+        <div id="tasks">
+          <span class="element-label">Task Lists</span>
+          <h2>Task Lists</h2>
+          <ul class="task-list">
+            <li><input type="checkbox" checked disabled> <span class="task-done">Design color palette</span></li>
+            <li><input type="checkbox" checked disabled> <span class="task-done">Implement heading styles</span></li>
+            <li><input type="checkbox" checked disabled> <span class="task-done">Style code blocks & syntax highlighting</span></li>
+            <li><input type="checkbox" checked disabled> <span class="task-done">Table styling with alternating rows</span></li>
+            <li><input type="checkbox" disabled> Add support for Mermaid diagram colors</li>
+            <li><input type="checkbox" disabled> Create light mode variant</li>
+          </ul>
+        </div>
+
+        <hr>
+
+        <!-- Inline Code -->
+        <div id="code-inline">
+          <span class="element-label">Inline Code</span>
+          <h2>Inline Code</h2>
+          <p>Use the <code>opencode.css</code> file in your Typora themes folder. You can configure the <code>--bg-primary</code> variable to adjust the background. The <code>border-radius</code> uses <code>var(--radius-m)</code> for consistency.</p>
+        </div>
+
+        <hr>
+
+        <!-- Code Blocks -->
+        <div id="code-blocks">
+          <span class="element-label">Fenced Code Blocks</span>
+          <h2>Code Blocks</h2>
+
+          <h3>JavaScript</h3>
+          <pre><code><span class="cm">// OpenCode theme configuration</span>
+<span class="kw">const</span> <span class="fn">theme</span> <span class="op">=</span> <span class="pc">{</span>
+  <span class="pr">name</span><span class="op">:</span> <span class="st">"OpenCode"</span><span class="op">,</span>
+  <span class="pr">variant</span><span class="op">:</span> <span class="st">"dark"</span><span class="op">,</span>
+  <span class="pr">colors</span><span class="op">:</span> <span class="pc">{</span>
+    <span class="pr">background</span><span class="op">:</span> <span class="st">"#0d1117"</span><span class="op">,</span>
+    <span class="pr">foreground</span><span class="op">:</span> <span class="st">"#f0f6fc"</span><span class="op">,</span>
+    <span class="pr">accent</span><span class="op">:</span> <span class="st">"#8a6cc4"</span><span class="op">,</span>
+    <span class="pr">headings</span><span class="op">:</span> <span class="st">"#d19af8"</span><span class="op">,</span>
+  <span class="pc">}</span><span class="op">,</span>
+<span class="pc">}</span><span class="op">;</span>
+
+<span class="kw">async function</span> <span class="fn">loadTheme</span><span class="pc">(</span><span class="pc">)</span> <span class="pc">{</span>
+  <span class="kw">const</span> css <span class="op">=</span> <span class="kw">await</span> <span class="fn">fetch</span><span class="pc">(</span><span class="st">"opencode.css"</span><span class="pc">)</span><span class="op">;</span>
+  <span class="fn">console</span><span class="op">.</span><span class="fn">log</span><span class="pc">(</span><span class="st">`Loaded: ${theme.name}`</span><span class="pc">)</span><span class="op">;</span>
+  <span class="kw">return</span> css<span class="op">.</span><span class="fn">text</span><span class="pc">(</span><span class="pc">)</span><span class="op">;</span>
+<span class="pc">}</span></code></pre>
+
+          <h3>Python</h3>
+          <pre><code><span class="cm"># Color palette extraction</span>
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+
+<span class="kw">@dataclass</span>
+<span class="kw">class</span> <span class="fn">OpenCodePalette</span><span class="op">:</span>
+    <span class="pr">bg_primary</span><span class="op">:</span> str <span class="op">=</span> <span class="st">"#0d1117"</span>
+    <span class="pr">purple</span><span class="op">:</span> str <span class="op">=</span> <span class="st">"#d19af8"</span>
+    <span class="pr">gold</span><span class="op">:</span> str <span class="op">=</span> <span class="st">"#e5a030"</span>
+    <span class="pr">cyan</span><span class="op">:</span> str <span class="op">=</span> <span class="st">"#5fd4bb"</span>
+
+    <span class="kw">def</span> <span class="fn">to_css_vars</span><span class="pc">(</span>self<span class="pc">)</span> <span class="op">-></span> str<span class="op">:</span>
+        <span class="kw">return</span> <span class="st">f"""
+:root {{
+  --bg-primary: {self.bg_primary};
+  --purple: {self.purple};
+  --gold: {self.gold};
+}}"""</span>
+
+palette <span class="op">=</span> <span class="fn">OpenCodePalette</span><span class="pc">(</span><span class="pc">)</span>
+<span class="fn">print</span><span class="pc">(</span>palette<span class="op">.</span><span class="fn">to_css_vars</span><span class="pc">(</span><span class="pc">)</span><span class="pc">)</span></code></pre>
+
+          <h3>CSS</h3>
+          <pre><code><span class="cm">/* OpenCode custom properties */</span>
+<span class="tg">:root</span> <span class="pc">{</span>
+  <span class="pr">--bg-primary</span><span class="op">:</span> <span class="vl">#0d1117</span><span class="op">;</span>
+  <span class="pr">--purple</span><span class="op">:</span> <span class="vl">#d19af8</span><span class="op">;</span>
+  <span class="pr">--accent</span><span class="op">:</span> <span class="vl">#8a6cc4</span><span class="op">;</span>
+<span class="pc">}</span>
+
+<span class="tg">#write</span> <span class="tg">h1</span> <span class="pc">{</span>
+  <span class="pr">color</span><span class="op">:</span> <span class="fn">var</span><span class="pc">(</span><span class="pr">--purple</span><span class="pc">)</span><span class="op">;</span>
+  <span class="pr">font-weight</span><span class="op">:</span> <span class="vl">600</span><span class="op">;</span>
+  <span class="pr">border-bottom</span><span class="op">:</span> <span class="vl">1px</span> <span class="kw">solid</span> <span class="fn">var</span><span class="pc">(</span><span class="pr">--border</span><span class="pc">)</span><span class="op">;</span>
+<span class="pc">}</span></code></pre>
+
+          <h3>HTML</h3>
+          <pre><code><span class="tg">&lt;!DOCTYPE</span> <span class="at">html</span><span class="tg">&gt;</span>
+<span class="tg">&lt;html</span> <span class="at">lang</span><span class="op">=</span><span class="st">"en"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;head&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;title&gt;</span>OpenCode<span class="tg">&lt;/title&gt;</span>
+  <span class="tg">&lt;link</span> <span class="at">rel</span><span class="op">=</span><span class="st">"stylesheet"</span> <span class="at">href</span><span class="op">=</span><span class="st">"opencode.css"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="tg">&lt;body&gt;</span>
+  <span class="tg">&lt;div</span> <span class="at">id</span><span class="op">=</span><span class="st">"write"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>Hello, OpenCode<span class="tg">&lt;/h1&gt;</span>
+  <span class="tg">&lt;/div&gt;</span>
+<span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></code></pre>
+        </div>
+
+        <hr>
+
+        <!-- Tables -->
+        <div id="tables">
+          <span class="element-label">Tables</span>
+          <h2>Tables</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Color</th>
+                <th>Hex Value</th>
+                <th>Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Headings</td>
+                <td style="color: var(--purple);">Purple</td>
+                <td><code>#d19af8</code></td>
+                <td>h1 – h6</td>
+              </tr>
+              <tr>
+                <td>Bold</td>
+                <td style="color: var(--gold);">Gold</td>
+                <td><code>#e5a030</code></td>
+                <td>Strong text</td>
+              </tr>
+              <tr>
+                <td>Links</td>
+                <td style="color: var(--accent);">Accent</td>
+                <td><code>#8a6cc4</code></td>
+                <td>Anchors, references</td>
+              </tr>
+              <tr>
+                <td>Strings</td>
+                <td style="color: var(--green);">Green</td>
+                <td><code>#9ece6a</code></td>
+                <td>Code string literals</td>
+              </tr>
+              <tr>
+                <td>Keywords</td>
+                <td style="color: var(--purple);">Purple</td>
+                <td><code>#d19af8</code></td>
+                <td>Code keywords</td>
+              </tr>
+              <tr>
+                <td>Properties</td>
+                <td style="color: var(--cyan);">Cyan</td>
+                <td><code>#5fd4bb</code></td>
+                <td>Object properties</td>
+              </tr>
+              <tr>
+                <td>Operators</td>
+                <td style="color: var(--sky);">Sky</td>
+                <td><code>#89ddff</code></td>
+                <td>Symbols, operators</td>
+              </tr>
+              <tr>
+                <td>Values</td>
+                <td style="color: var(--orange);">Orange</td>
+                <td><code>#ff9e64</code></td>
+                <td>Numbers, constants</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr>
+
+        <!-- Horizontal Rule -->
+        <div id="hr">
+          <span class="element-label">Horizontal Rule</span>
+          <h2>Horizontal Rule</h2>
+          <p>The horizontal rule above and below are styled with a subtle border using <code>var(--border)</code> (#30363d).</p>
+          <hr>
+          <p>They provide clean visual separation between sections without being distracting.</p>
+        </div>
+
+        <hr>
+
+        <!-- Math -->
+        <div id="math">
+          <span class="element-label">Math (LaTeX)</span>
+          <h2>Math Blocks</h2>
+          <p>OpenCode styles both inline and block math. Here's Euler's identity rendered in a block:</p>
+          <div class="math-block">
+            e<sup>iπ</sup> + 1 = 0
+          </div>
+          <p>And the quadratic formula:</p>
+          <div class="math-block">
+            x = (−b ± √(b² − 4ac)) / 2a
+          </div>
+          <p>Inline math like <code>E = mc²</code> uses the same monospace styling as code.</p>
+        </div>
+
+        <hr>
+
+        <!-- Footnotes -->
+        <div id="footnotes">
+          <span class="element-label">Footnotes</span>
+          <h2>Footnotes</h2>
+          <p>The OpenCode theme was originally created for Obsidian<a href="#fn1" class="footnote-ref">[1]</a> and later ported to Typora<a href="#fn2" class="footnote-ref">[2]</a>. It draws inspiration from the Tokyo Night color scheme<a href="#fn3" class="footnote-ref">[3]</a>.</p>
+          <div class="footnotes">
+            <p id="fn1"><a class="footnote-ref">[1]</a> Obsidian is a knowledge management app. <a href="https://obsidian.md">obsidian.md</a></p>
+            <p id="fn2"><a class="footnote-ref">[2]</a> Typora is a minimal markdown editor. <a href="https://typora.io">typora.io</a></p>
+            <p id="fn3"><a class="footnote-ref">[3]</a> Tokyo Night originated as a VS Code theme by enkia.</p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <p>OpenCode Theme for Typora · Made by <a href="https://github.com/nxxxsooo">nxxxsooo</a> · <a href="index.html">← Back to Home</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar active state -->
+  <script>
+    const items = document.querySelectorAll('.sidebar-item');
+    const sections = document.querySelectorAll('.write > div[id]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          items.forEach(item => item.classList.remove('active'));
+          const match = document.querySelector(`.sidebar-item[href="#${entry.target.id}"]`);
+          if (match) match.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
