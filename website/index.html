@@ -1648,7 +1648,7 @@
         <div style="max-width: 900px; margin: 0 auto; text-align: center;">
           <h3 class="step-title" style="margin-bottom: 8px;">⚡ One-liner for AI Agents</h3>
           <p class="step-desc" style="margin-bottom: 20px;">Paste this into your AI coding assistant (Claude, Cursor, Copilot, etc.) to install both themes automatically:</p>
-          <pre style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; text-align: left;"><code style="color: var(--cyan);"># Obsidian — install to vault theme folder
+          <pre style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; text-align: left; white-space: pre-wrap; word-break: break-all;"><code style="color: var(--cyan);"># Obsidian — install to vault theme folder
 VAULT="$(find ~/Library/Application\ Support/obsidian -name '.obsidian' -maxdepth 3 2>/dev/null | head -1)" && \
 mkdir -p "$VAULT/themes/OpenCode" && \
 curl -sL https://raw.githubusercontent.com/nxxxsooo/obsidian-opencode-theme/main/theme.css -o "$VAULT/themes/OpenCode/theme.css" && \
