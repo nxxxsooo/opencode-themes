@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OpenCode Themes — Terminal-inspired dark themes for Obsidian and Typora. Tokyo Night palette meets terminal aesthetics across your writing tools.">
+  <meta name="theme-color" content="#0d1117">
+  <title>OpenCode Themes</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================================
+       Design Tokens (from opencode.css)
+       ============================================================ */
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #1c2128;
+      --bg-elevated: #21262d;
+      --border: #30363d;
+      --border-hover: #484f58;
+      
+      --text: #f0f6fc;
+      --text-secondary: #e6edf3;
+      --text-muted: #9ca3af;
+      --text-faint: #7c838d;
+      
+      --accent: #8a6cc4;
+      --accent-hover: #9b80d1;
+      --accent-rgb: 138, 108, 196;
+      
+      --purple: #d19af8;
+      --cyan: #5fd4bb;
+      --blue: #7aa2f7;
+      --green: #9ece6a;
+      --yellow: #e0af68;
+      --orange: #ff9e64;
+      --red: #f7768e;
+      --pink: #ff79c6;
+      --sky: #89ddff;
+      --gold: #e5a030;
+      
+      --radius-s: 4px;
+      --radius-m: 8px;
+      --radius-l: 12px;
+      --radius-xl: 16px;
+      
+      --font-display: "Space Grotesk", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    
+    /* ============================================================
+       Reset & Base
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* ============================================================
+       Background Pattern
+       ============================================================ */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(48, 54, 61, 0.5) 1px, transparent 0);
+      background-size: 24px 24px;
+      opacity: 0.5;
+    }
+    
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(138, 108, 196, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* ============================================================
+       Navigation
+       ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--purple);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    
+    .nav-logo span {
+      color: var(--text);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+    
+    /* ============================================================
+       Hero Section
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+    
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      border-radius: var(--radius-m);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(138, 108, 196, 0.3);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    
+    .btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Terminal Animation */
+    .terminal-window {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 800px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-l);
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+    
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .terminal-dot.red { background: var(--red); }
+    .terminal-dot.yellow { background: var(--yellow); }
+    .terminal-dot.green { background: var(--green); }
+    
+    .terminal-title {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      min-height: 200px;
+    }
+    
+    .terminal-line {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .terminal-prompt {
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    
+    .terminal-command {
+      color: var(--text);
+    }
+    
+    .terminal-output {
+      color: var(--text-muted);
+      margin-left: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background: var(--accent);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* ============================================================
+       Editors Section
+       ============================================================ */
+    .editors {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .editors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .editor-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-l);
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .editor-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .editor-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .editor-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-m);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .editor-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .editor-icon.obsidian svg {
+      color: #7b68ee;
+    }
+    
+    .editor-icon.typora svg {
+      color: var(--purple);
+    }
+    
+    .editor-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    
+    .editor-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    
+    .editor-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .editor-links .btn {
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem;
+    }
+    
+    /* ============================================================
+       Preview Section
+       ============================================================ */
+    .preview {
+      padding: 6rem 2rem;
+    }
+    
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-label {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    
+    .preview-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .preview-tab {
+      padding: 0.75rem 1.5rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .preview-tab:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+    
+    .preview-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg-primary);
+    }
+    
+    .preview-content {
+      display: none;
+    }
+    
+    .preview-content.active {
+      display: block;
+    }
+    
+    .editor-mockup {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-l);
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    }
+    
+    .editor-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .editor-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .editor-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    
+    .editor-title {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .editor-content {
+      padding: 2rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    
+    /* Markdown Preview Styles */
+    .markdown-preview h1 {
+      color: var(--purple);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .markdown-preview h2 {
+      color: var(--purple);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+    }
+    
+    .markdown-preview p {
+      margin: 1rem 0;
+      color: var(--text);
+    }
+    
+    .markdown-preview strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    
+    .markdown-preview em {
+      color: var(--purple);
+    }
+    
+    .markdown-preview code {
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      padding: 0.2em 0.5em;
+      border-radius: var(--radius-s);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+    
+    .markdown-preview pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    
+    .markdown-preview pre code {
+      background: transparent;
+      padding: 0;
+      color: var(--text);
+    }
+    
+    .markdown-preview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      border-radius: var(--radius-m);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    
+    .markdown-preview th {
+      background: var(--bg-tertiary);
+      color: var(--purple);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    
+    .markdown-preview td {
+      padding: 0.625rem 1rem;
+      border: 1px solid var(--border);
+    }
+    
+    .markdown-preview td:first-child {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    
+    .markdown-preview tr:nth-child(even) td {
+      background: var(--bg-primary);
+    }
+    
+    .markdown-preview tr:nth-child(odd) td {
+      background: var(--bg-secondary);
+    }
+    
+    .markdown-preview blockquote {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+      color: var(--text-secondary);
+    }
+    
+    .markdown-preview ul {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+    
+    .markdown-preview li {
+      margin: 0.5rem 0;
+    }
+    
+    .markdown-preview li::marker {
+      color: var(--purple);
+    }
+    
+    /* Obsidian-specific styles */
+    .obsidian-sidebar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .obsidian-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-s);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .obsidian-sidebar-item svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Syntax Highlighting */
+    .sh-keyword { color: var(--purple); }
+    .sh-function { color: var(--accent); }
+    .sh-string { color: var(--green); }
+    .sh-comment { color: var(--text-muted); font-style: italic; }
+    .sh-property { color: var(--cyan); }
+    .sh-operator { color: var(--sky); }
+    .sh-tag { color: var(--red); }
+    
+    /* ============================================================
+       Features Section
+       ============================================================ */
+    .features {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    
+    .feature-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-l);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .feature-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-m);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+    
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* ============================================================
+       Colors Section
+       ============================================================ */
+    .colors {
+      padding: 6rem 2rem;
+    }
+    
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    
+    .color-swatch {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    
+    .color-swatch.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .color-swatch:hover {
+      transform: scale(1.05);
+    }
+    
+    .color-preview {
+      height: 100px;
+      width: 100%;
+    }
+    
+    .color-info {
+      padding: 1rem;
+    }
+    
+    .color-name {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    
+    .color-hex {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    /* ============================================================
+       Installation Section
+       ============================================================ */
+    .installation {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .install-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .install-tab {
+      padding: 0.75rem 1.5rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .install-tab:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+    
+    .install-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg-primary);
+    }
+    
+    .install-content {
+      display: none;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .install-content.active {
+      display: block;
+    }
+    
+    .steps {
+      margin-top: 2rem;
+    }
+    
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    
+    .step.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .step-number {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .step-content {
+      flex: 1;
+    }
+    
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .step-desc code {
+      background: var(--bg-primary);
+      color: var(--cyan);
+      padding: 0.2em 0.5em;
+      border-radius: var(--radius-s);
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+    }
+    
+    .step-desc a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .step-desc a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ============================================================
+       Footer
+       ============================================================ */
+    .footer {
+      padding: 3rem 2rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .footer-heart {
+      color: var(--red);
+    }
+    
+    .footer-author {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .footer-license {
+      color: var(--text-faint);
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .footer-left {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .footer-links {
+        gap: 1.5rem;
+      }
+    }
+    
+    /* ============================================================
+       Scroll Animations
+       ============================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* ============================================================
+       Responsive
+       ============================================================ */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 6rem 1rem 3rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+      
+      .terminal-window {
+        margin-top: 2rem;
+      }
+      
+      .preview,
+      .features,
+      .colors,
+      .installation {
+        padding: 4rem 1rem;
+      }
+      
+      .editor-content {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .markdown-preview h1 {
+        font-size: 1.5rem;
+      }
+      
+      .editors-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .preview-tabs,
+      .install-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="bg-pattern"></div>
+  <div class="bg-glow"></div>
+  
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">Open<span>Code</span></a>
+      <ul class="nav-links">
+        <li><a href="#editors">Editors</a></li>
+        <li><a href="#preview">Preview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#installation">Install</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">✨ Available for Obsidian &amp; Typora</span>
+      <h1 class="hero-title">OpenCode Themes</h1>
+      <p class="hero-subtitle">A terminal-inspired dark theme for your writing tools</p>
+      <p class="hero-tagline">Tokyo Night palette meets terminal aesthetics. Available for both Obsidian and Typora editors.</p>
+      
+      <div class="hero-cta">
+        <a href="https://github.com/nxxxsooo/obsidian-opencode-theme" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          Download for Obsidian
+        </a>
+        <a href="https://github.com/nxxxsooo/typora-opencode-theme" class="btn btn-secondary" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download for Typora
+        </a>
+        <a href="https://github.com/nxxxsooo/opencode-themes" class="btn btn-secondary" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      
+      <!-- Terminal Animation -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">bash — opencode-themes</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">➜</span>
+            <span class="terminal-command">opencode-theme install obsidian<span class="cursor"></span></span>
+          </div>
+          <div class="terminal-output">Installing OpenCode for Obsidian...</div>
+          <div class="terminal-output" style="color: var(--green);">✓ Obsidian theme installed</div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">➜</span>
+            <span class="terminal-command">opencode-theme install typora<span class="cursor"></span></span>
+          </div>
+          <div class="terminal-output">Installing OpenCode for Typora...</div>
+          <div class="terminal-output" style="color: var(--purple);">✓ Typora theme installed</div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">➜</span>
+            <span class="terminal-command">opencode-theme preview<span class="cursor"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Editors Section -->
+  <section id="editors" class="editors">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <span class="section-label">Choose Your Editor</span>
+        <h2 class="section-title">Available For</h2>
+      </div>
+      
+      <div class="editors-grid">
+        <!-- Obsidian Card -->
+        <div class="editor-card">
+          <div class="editor-icon obsidian">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L2 12l10 10 10-10L12 2zm0 3.5l6.5 6.5-6.5 6.5L5.5 12 12 5.5z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3 class="editor-title">Obsidian</h3>
+          <p class="editor-desc">A powerful knowledge base that works on top of a local folder of plain text Markdown files. Perfect for building your second brain with linked notes and graph view.</p>
+          <div class="editor-links">
+            <a href="https://github.com/nxxxsooo/obsidian-opencode-theme" class="btn btn-primary" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download
+            </a>
+            <a href="https://github.com/nxxxsooo/obsidian-opencode-theme" class="btn btn-secondary" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        
+        <!-- Typora Card -->
+        <div class="editor-card">
+          <div class="editor-icon typora">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+          </div>
+          <h3 class="editor-title">Typora</h3>
+          <p class="editor-desc">A minimal markdown editor and reader that seamlessly blends writing and preview. What you see is what you get — no split screen, just pure writing flow.</p>
+          <div class="editor-links">
+            <a href="https://github.com/nxxxsooo/typora-opencode-theme" class="btn btn-primary" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download
+            </a>
+            <a href="https://github.com/nxxxsooo/typora-opencode-theme" class="btn btn-secondary" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Preview Section -->
+  <section id="preview" class="preview">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <span class="section-label">Live Preview</span>
+        <h2 class="section-title">See It In Action</h2>
+      </div>
+      
+      <div class="preview-tabs">
+        <button class="preview-tab active" data-tab="obsidian">Obsidian</button>
+        <button class="preview-tab" data-tab="typora">Typora</button>
+      </div>
+      
+      <!-- Obsidian Preview -->
+      <div class="preview-content active" id="preview-obsidian">
+        <div class="editor-mockup fade-in">
+          <div class="editor-titlebar">
+            <div class="editor-dots">
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+            </div>
+            <span class="editor-title">README.md — Obsidian</span>
+          </div>
+          <div class="editor-content">
+            <div class="obsidian-sidebar">
+              <div class="obsidian-sidebar-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                </svg>
+                Files
+              </div>
+              <div class="obsidian-sidebar-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                Graph
+              </div>
+              <div class="obsidian-sidebar-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                Search
+              </div>
+            </div>
+            <div class="markdown-preview">
+              <h1>OpenCode Theme</h1>
+              <p>A <strong>terminal-inspired dark theme</strong> for Obsidian. Features the <em>Tokyo Night</em> color palette with meticulous attention to detail.</p>
+              
+              <h2>Code Highlighting</h2>
+              <pre><code><span class="sh-keyword">const</span> <span class="sh-function">greeting</span> = <span class="sh-string">"Hello, OpenCode!"</span>;
+<span class="sh-keyword">const</span> colors = {
+  <span class="sh-property">purple</span>: <span class="sh-string">"#d19af8"</span>,
+  <span class="sh-property">gold</span>: <span class="sh-string">"#e5a030"</span>,
+  <span class="sh-property">cyan</span>: <span class="sh-string">"#5fd4bb"</span>
+};
+
+<span class="sh-comment">// Terminal aesthetics meet knowledge management</span>
+<span class="sh-function">console</span>.<span class="sh-function">log</span>(<span class="sh-string">`Using ${colors.purple} for headings`</span>);</code></pre>
+              
+              <h2>Tables</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Status</th>
+                    <th>Quality</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Syntax Highlighting</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                  <tr>
+                    <td>Dark Mode</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                  <tr>
+                    <td>Graph View</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <blockquote>
+                <p>"The best theme for developers who build their second brain."</p>
+              </blockquote>
+              
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>Tokyo Night palette</strong> — Carefully curated colors</li>
+                <li><strong>JetBrains Mono</strong> — Optimized code font</li>
+                <li><strong>Full coverage</strong> — Every UI element styled</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Typora Preview -->
+      <div class="preview-content" id="preview-typora">
+        <div class="editor-mockup fade-in">
+          <div class="editor-titlebar">
+            <div class="editor-dots">
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+              <div class="editor-dot"></div>
+            </div>
+            <span class="editor-title">README.md — Typora</span>
+          </div>
+          <div class="editor-content">
+            <div class="markdown-preview">
+              <h1>OpenCode Theme</h1>
+              <p>A <strong>terminal-inspired dark theme</strong> for Typora, ported from the popular Obsidian theme. Features the <em>Tokyo Night</em> color palette with meticulous attention to detail.</p>
+              
+              <h2>Code Highlighting</h2>
+              <pre><code><span class="sh-keyword">const</span> <span class="sh-function">greeting</span> = <span class="sh-string">"Hello, OpenCode!"</span>;
+<span class="sh-keyword">const</span> colors = {
+  <span class="sh-property">purple</span>: <span class="sh-string">"#d19af8"</span>,
+  <span class="sh-property">gold</span>: <span class="sh-string">"#e5a030"</span>,
+  <span class="sh-property">cyan</span>: <span class="sh-string">"#5fd4bb"</span>
+};
+
+<span class="sh-comment">// Terminal aesthetics meet writing elegance</span>
+<span class="sh-function">console</span>.<span class="sh-function">log</span>(<span class="sh-string">`Using ${colors.purple} for headings`</span>);</code></pre>
+              
+              <h2>Tables</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Status</th>
+                    <th>Quality</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Syntax Highlighting</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                  <tr>
+                    <td>Dark Mode</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                  <tr>
+                    <td>Source Mode</td>
+                    <td>Complete</td>
+                    <td>★★★★★</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <blockquote>
+                <p>"The best theme for developers who write documentation."</p>
+              </blockquote>
+              
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>Tokyo Night palette</strong> — Carefully curated colors</li>
+                <li><strong>JetBrains Mono</strong> — Optimized code font</li>
+                <li><strong>Full coverage</strong> — Every UI element styled</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <span class="section-label">Why OpenCode</span>
+        <h2 class="section-title">Crafted for Developers</h2>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Tokyo Night Palette</h3>
+          <p class="feature-desc">Carefully curated dark color scheme inspired by Tokyo Night. Easy on the eyes during long writing sessions.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Code-First Design</h3>
+          <p class="feature-desc">Optimized syntax highlighting with JetBrains Mono. Every code block looks like it belongs in your IDE.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Full Coverage</h3>
+          <p class="feature-desc">Sidebars, modals, menus, source mode — every corner of your editor is styled with consistency.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Print Ready</h3>
+          <p class="feature-desc">Clean light export for PDF and print. Professional output whether digital or physical.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Colors Section -->
+  <section id="colors" class="colors">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <span class="section-label">Design Tokens</span>
+        <h2 class="section-title">Color Palette</h2>
+      </div>
+      
+      <div class="colors-grid">
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #0d1117;"></div>
+          <div class="color-info">
+            <div class="color-name">Background</div>
+            <div class="color-hex">#0d1117</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #161b22;"></div>
+          <div class="color-info">
+            <div class="color-name">Secondary</div>
+            <div class="color-hex">#161b22</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #d19af8;"></div>
+          <div class="color-info">
+            <div class="color-name">Purple</div>
+            <div class="color-hex">#d19af8</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #e5a030;"></div>
+          <div class="color-info">
+            <div class="color-name">Gold</div>
+            <div class="color-hex">#e5a030</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #5fd4bb;"></div>
+          <div class="color-info">
+            <div class="color-name">Cyan</div>
+            <div class="color-hex">#5fd4bb</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #7aa2f7;"></div>
+          <div class="color-info">
+            <div class="color-name">Blue</div>
+            <div class="color-hex">#7aa2f7</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #9ece6a;"></div>
+          <div class="color-info">
+            <div class="color-name">Green</div>
+            <div class="color-hex">#9ece6a</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #f7768e;"></div>
+          <div class="color-info">
+            <div class="color-name">Red</div>
+            <div class="color-hex">#f7768e</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #89ddff;"></div>
+          <div class="color-info">
+            <div class="color-name">Sky</div>
+            <div class="color-hex">#89ddff</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Installation Section -->
+  <section id="installation" class="installation">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <span class="section-label">Get Started</span>
+        <h2 class="section-title">Installation</h2>
+      </div>
+      
+      <div class="install-tabs">
+        <button class="install-tab active" data-tab="obsidian">Obsidian</button>
+        <button class="install-tab" data-tab="typora">Typora</button>
+      </div>
+      
+      <!-- Obsidian Installation -->
+      <div class="install-content active" id="install-obsidian">
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Download the Theme</h3>
+              <p class="step-desc">Get the theme from <a href="https://github.com/nxxxsooo/obsidian-opencode-theme/releases" target="_blank" rel="noopener">GitHub Releases</a>.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Open Obsidian Settings</h3>
+              <p class="step-desc">Go to <strong>Settings</strong> → <strong>Appearance</strong> → <strong>Themes</strong> → <strong>Manage</strong>.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Install the Theme</h3>
+              <p class="step-desc">Click <strong>Install</strong> on OpenCode theme, then <strong>Use</strong> to activate it.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Enjoy!</h3>
+              <p class="step-desc">Your Obsidian now has a fresh terminal-inspired look. Start taking notes in style.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Typora Installation -->
+      <div class="install-content" id="install-typora">
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Download the Theme</h3>
+              <p class="step-desc">Get <code>opencode.css</code> from the <a href="https://github.com/nxxxsooo/typora-opencode-theme/releases" target="_blank" rel="noopener">GitHub Releases</a> page.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Open Theme Folder</h3>
+              <p class="step-desc">In Typora: <strong>Preferences</strong> → <strong>Appearance</strong> → <strong>Open Theme Folder</strong></p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Copy the Theme File</h3>
+              <p class="step-desc">Place <code>opencode.css</code> into the theme folder.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Activate the Theme</h3>
+              <p class="step-desc">Restart Typora and select <strong>OpenCode</strong> from <strong>Preferences</strong> → <strong>Appearance</strong> → <strong>Theme</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <span class="footer-author">Made with <span class="footer-heart">♥</span> by nxxxsooo</span>
+        <span class="footer-license">MIT License</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/nxxxsooo/opencode-themes" target="_blank" rel="noopener">Monorepo</a></li>
+        <li><a href="https://github.com/nxxxsooo/obsidian-opencode-theme" target="_blank" rel="noopener">Obsidian</a></li>
+        <li><a href="https://github.com/nxxxsooo/typora-opencode-theme" target="_blank" rel="noopener">Typora</a></li>
+      </ul>
+    </div>
+  </footer>
+  
+  <!-- Scroll Animation Script -->
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Stagger animation for children
+          const children = entry.target.querySelectorAll('.feature-card, .color-swatch, .step, .editor-card');
+          children.forEach((child, index) => {
+            setTimeout(() => {
+              child.classList.add('visible');
+            }, index * 100);
+          });
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in, .features-grid, .colors-grid, .steps, .editors-grid').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Preview tabs
+    document.querySelectorAll('.preview-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        
+        // Remove active class from all tabs and content
+        document.querySelectorAll('.preview-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.preview-content').forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        this.classList.add('active');
+        document.getElementById(`preview-${tabId}`).classList.add('active');
+      });
+    });
+    
+    // Installation tabs
+    document.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        
+        // Remove active class from all tabs and content
+        document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.install-content').forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        this.classList.add('active');
+        document.getElementById(`install-${tabId}`).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

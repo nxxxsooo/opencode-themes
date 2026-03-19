@@ -1,0 +1,820 @@
+/*
+ * OpenCode Theme for Typora
+ * A terminal-inspired dark theme ported from Obsidian
+ * Based on OpenCode terminal color scheme
+ * Tokyo Night influenced palette
+ *
+ * Author: nxxxsooo
+ * License: MIT
+ * https://github.com/nxxxsooo/typora-opencode-theme
+ */
+
+/* ============================================================
+   CSS Custom Properties (Design Tokens)
+   ============================================================ */
+
+:root {
+  /* ---- Backgrounds ---- */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #1c2128;
+  --bg-elevated: #21262d;
+  --border: #30363d;
+  --border-hover: #484f58;
+
+  /* ---- Text ---- */
+  --text: #f0f6fc;
+  --text-secondary: #e6edf3;
+  --text-muted: #9ca3af;
+  --text-faint: #7c838d;
+
+  /* ---- Accent (Purple) ---- */
+  --accent: #8a6cc4;
+  --accent-hover: #9b80d1;
+  --accent-rgb: 138, 108, 196;
+
+  /* ---- Semantic Colors ---- */
+  --purple: #d19af8;
+  --cyan: #5fd4bb;
+  --blue: #7aa2f7;
+  --green: #9ece6a;
+  --yellow: #e0af68;
+  --orange: #ff9e64;
+  --red: #f7768e;
+  --pink: #ff79c6;
+  --sky: #89ddff;
+  --gold: #e5a030;
+
+  /* ---- Code Tokens ---- */
+  --code-bg: #161b22;
+  --code-text: #f0f6fc;
+  --code-comment: #8b949e;
+  --code-keyword: #d19af8;
+  --code-string: #9ece6a;
+  --code-function: #8a6cc4;
+  --code-property: #5fd4bb;
+  --code-operator: #89ddff;
+  --code-value: #ff9e64;
+  --code-tag: #f7768e;
+  --code-punctuation: #f0f6fc;
+
+  /* ---- Spacing ---- */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+
+  /* ---- Typography ---- */
+  --font-sans: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "PingFang SC", monospace;
+}
+
+/* ============================================================
+   Global / Body
+   ============================================================ */
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+#write {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 32px 96px;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  font-weight: 450;
+  -webkit-text-stroke: 0.2px currentColor;
+}
+
+#write > :first-child {
+  margin-top: 0;
+}
+
+::selection {
+  background: rgba(122, 162, 247, 0.3);
+}
+
+/* ============================================================
+   Headings
+   ============================================================ */
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  color: var(--purple);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 1.6em 0 0.8em;
+}
+
+#write h1 {
+  font-size: 2.2em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35em;
+}
+
+#write h2 {
+  font-size: 1.7em;
+}
+
+#write h3 {
+  font-size: 1.35em;
+}
+
+#write h4 {
+  font-size: 1.15em;
+}
+
+#write h5 {
+  font-size: 1em;
+}
+
+#write h6 {
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Paragraphs & Inline
+   ============================================================ */
+
+#write p {
+  margin: 1em 0;
+  color: var(--text);
+}
+
+#write strong,
+#write b {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+#write em {
+  color: var(--purple);
+}
+
+#write del {
+  color: var(--text-faint);
+}
+
+#write mark {
+  background-color: rgba(224, 175, 104, 0.4);
+  color: var(--text);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   Links
+   ============================================================ */
+
+#write a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+#write a:hover {
+  color: var(--accent-hover);
+  border-bottom-color: rgba(var(--accent-rgb), 0.5);
+}
+
+/* ============================================================
+   Blockquote
+   ============================================================ */
+
+#write blockquote {
+  background-color: var(--bg-secondary);
+  border-left: 4px solid var(--accent);
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  color: var(--text-secondary);
+}
+
+#write blockquote p {
+  margin: 0.5em 0;
+}
+
+/* ============================================================
+   Lists
+   ============================================================ */
+
+#write ul,
+#write ol {
+  padding-left: 1.8em;
+}
+
+#write li {
+  margin: 0.35em 0;
+}
+
+#write li::marker {
+  color: var(--purple);
+}
+
+/* ============================================================
+   Task Lists
+   ============================================================ */
+
+.task-list-item {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.task-list-item input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--accent);
+  transform: translateY(1px);
+}
+
+.task-list-done {
+  color: var(--text-faint);
+  text-decoration: line-through;
+}
+
+/* ============================================================
+   Horizontal Rule
+   ============================================================ */
+
+#write hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+/* ============================================================
+   Code — Inline
+   ============================================================ */
+
+#write code,
+tt {
+  background-color: var(--bg-elevated);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 450;
+}
+
+/* ============================================================
+   Code — Fenced Blocks
+   ============================================================ */
+
+#write pre,
+#write pre.md-fences {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 16px;
+  margin: 1.2em 0;
+  overflow-x: auto;
+  line-height: 1.6;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 450;
+  -webkit-font-smoothing: antialiased;
+}
+
+#write pre code,
+#write pre.md-fences code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: var(--code-text);
+  font-size: inherit;
+}
+
+/* Syntax Highlighting (CodeMirror) */
+.cm-s-inner .cm-keyword,
+.md-fences .cm-keyword { color: var(--code-keyword); }
+
+.cm-s-inner .cm-atom,
+.md-fences .cm-atom { color: var(--code-value); }
+
+.cm-s-inner .cm-number,
+.md-fences .cm-number { color: var(--code-value); }
+
+.cm-s-inner .cm-def,
+.md-fences .cm-def { color: var(--code-function); }
+
+.cm-s-inner .cm-variable,
+.md-fences .cm-variable { color: var(--code-text); }
+
+.cm-s-inner .cm-variable-2,
+.md-fences .cm-variable-2 { color: var(--code-property); }
+
+.cm-s-inner .cm-variable-3,
+.md-fences .cm-variable-3,
+.cm-s-inner .cm-type,
+.md-fences .cm-type { color: var(--code-function); }
+
+.cm-s-inner .cm-property,
+.md-fences .cm-property { color: var(--code-property); }
+
+.cm-s-inner .cm-operator,
+.md-fences .cm-operator { color: var(--code-operator); }
+
+.cm-s-inner .cm-comment,
+.md-fences .cm-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.cm-s-inner .cm-string,
+.md-fences .cm-string,
+.cm-s-inner .cm-string-2,
+.md-fences .cm-string-2 { color: var(--code-string); }
+
+.cm-s-inner .cm-meta,
+.md-fences .cm-meta { color: var(--code-keyword); }
+
+.cm-s-inner .cm-qualifier,
+.md-fences .cm-qualifier { color: var(--code-keyword); }
+
+.cm-s-inner .cm-builtin,
+.md-fences .cm-builtin { color: var(--code-function); }
+
+.cm-s-inner .cm-bracket,
+.md-fences .cm-bracket { color: var(--code-punctuation); }
+
+.cm-s-inner .cm-tag,
+.md-fences .cm-tag { color: var(--code-tag); }
+
+.cm-s-inner .cm-attribute,
+.md-fences .cm-attribute { color: var(--code-property); }
+
+.cm-s-inner .cm-hr,
+.md-fences .cm-hr { color: var(--code-comment); }
+
+.cm-s-inner .cm-link,
+.md-fences .cm-link { color: var(--accent); }
+
+.cm-s-inner .cm-header,
+.md-fences .cm-header { color: var(--purple); }
+
+.cm-s-inner .cm-negative,
+.md-fences .cm-negative { color: var(--red); }
+
+.cm-s-inner .cm-positive,
+.md-fences .cm-positive { color: var(--green); }
+
+/* Code block font features */
+pre[class*="language-"],
+code[class*="language-"] {
+  font-feature-settings: "liga" on, "calt" on;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+
+#write table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 1.5em 0;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--border);
+}
+
+#write th {
+  background-color: var(--bg-tertiary);
+  color: var(--purple);
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+#write td {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+#write td:first-child {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+#write tr:nth-child(even) td {
+  background-color: var(--bg-primary);
+}
+
+#write tr:nth-child(odd) td {
+  background-color: var(--bg-secondary);
+}
+
+#write tr:hover td {
+  background-color: var(--bg-tertiary);
+}
+
+/* ============================================================
+   Images
+   ============================================================ */
+
+#write img {
+  max-width: 100%;
+  border-radius: var(--radius-m);
+  margin: 1em 0;
+}
+
+/* ============================================================
+   YAML Front Matter
+   ============================================================ */
+
+pre.md-meta-block,
+.md-rawblock-on-edit,
+.md-fences.md-fences-with-lineno {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  color: var(--text-muted);
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* ============================================================
+   Table of Contents
+   ============================================================ */
+
+.md-toc {
+  font-size: 0.9em;
+}
+
+.md-toc-inner {
+  color: var(--text-muted);
+}
+
+.md-toc-inner:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   Footnotes
+   ============================================================ */
+
+.md-footnote {
+  color: var(--accent);
+  font-size: 0.85em;
+}
+
+sup.md-footnote {
+  background-color: transparent;
+}
+
+/* ============================================================
+   Sidebar & File Tree
+   ============================================================ */
+
+#typora-sidebar {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+#typora-sidebar .file-list-item,
+#typora-sidebar .file-library-node {
+  border-radius: var(--radius-s);
+  transition: background-color 0.15s ease;
+}
+
+#typora-sidebar .file-list-item:hover,
+#typora-sidebar .file-library-node:hover {
+  background-color: var(--bg-tertiary);
+}
+
+#typora-sidebar .file-list-item.active,
+#typora-sidebar .file-library-node.active {
+  background-color: var(--bg-elevated);
+  color: var(--blue);
+}
+
+.file-node-title {
+  color: var(--text-secondary);
+}
+
+.active .file-node-title {
+  color: var(--blue);
+}
+
+/* ============================================================
+   Header Bar / Title Bar
+   ============================================================ */
+
+header,
+.toolbar-title-container,
+#top-titlebar {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   Megamenu / Preferences
+   ============================================================ */
+
+.megamenu-content {
+  background-color: var(--bg-secondary);
+}
+
+.megamenu-menu-panel {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+}
+
+/* ============================================================
+   Source Code Mode
+   ============================================================ */
+
+.CodeMirror {
+  background-color: var(--bg-primary);
+  color: var(--text);
+}
+
+.CodeMirror-cursor {
+  border-left: 2px solid var(--accent) !important;
+}
+
+.CodeMirror-selected,
+.CodeMirror-selectedtext {
+  background: rgba(122, 162, 247, 0.2) !important;
+}
+
+.CodeMirror-activeline-background {
+  background: rgba(122, 162, 247, 0.06);
+}
+
+.CodeMirror-gutters {
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border);
+}
+
+.CodeMirror-linenumber {
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* ============================================================
+   Focus Mode & Typewriter Mode
+   ============================================================ */
+
+.on-focus-mode .md-end-block:not(.md-focus):not(.md-focus-container) {
+  opacity: 0.35;
+}
+
+.on-focus-mode .md-end-block:not(.md-focus):not(.md-focus-container):hover {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   Search Panel
+   ============================================================ */
+
+#md-searchpanel {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+#md-searchpanel input {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  color: var(--text);
+}
+
+#md-searchpanel input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+}
+
+#md-searchpanel .btn {
+  background-color: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+}
+
+#md-searchpanel .btn:hover {
+  background-color: var(--border);
+  color: var(--text);
+}
+
+/* ============================================================
+   Notification / Toast
+   ============================================================ */
+
+#md-notification {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-m);
+}
+
+/* ============================================================
+   Context Menu
+   ============================================================ */
+
+.context-menu {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-m) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  color: var(--text);
+}
+
+.context-menu .menu-item:hover {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.context-menu .menu-item.active {
+  background-color: var(--accent) !important;
+  color: var(--bg-primary) !important;
+}
+
+/* ============================================================
+   Tooltip
+   ============================================================ */
+
+.ty-tooltip {
+  background-color: var(--bg-tertiary);
+  color: var(--text);
+  border-radius: var(--radius-s);
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* ============================================================
+   Dialog / Modal
+   ============================================================ */
+
+.modal-dialog {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn-primary,
+.btn.primary {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border-radius: var(--radius-s);
+  font-weight: 500;
+  border: none;
+}
+
+.btn-primary:hover,
+.btn.primary:hover {
+  background-color: var(--accent-hover);
+}
+
+/* ============================================================
+   Form Inputs
+   ============================================================ */
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+  outline: none;
+}
+
+/* ============================================================
+   Math (MathJax / KaTeX)
+   ============================================================ */
+
+.MathJax_Display {
+  color: var(--text);
+}
+
+.md-math-block .MathJax {
+  color: var(--text);
+}
+
+/* ============================================================
+   Mermaid Diagrams
+   ============================================================ */
+
+.md-diagram-panel {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 16px;
+}
+
+/* ============================================================
+   Footer / Status Bar
+   ============================================================ */
+
+footer.ty-footer,
+.footer-item {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Print / Export
+   ============================================================ */
+
+@media print {
+  html, body {
+    background: white;
+    color: #1a1a1a;
+  }
+
+  #write {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  #write h1, #write h2, #write h3,
+  #write h4, #write h5, #write h6 {
+    color: #1a1a1a;
+  }
+
+  #write pre, #write code {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+  }
+
+  #write table th {
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+  }
+
+  #write blockquote {
+    border-left-color: #999;
+    background-color: #f9f9f9;
+  }
+}
