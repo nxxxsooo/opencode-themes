@@ -1645,13 +1645,10 @@
       </div>
       <!-- AI Agent Installation -->
       <div class="install-content" id="install-agent">
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">⚡</div>
-            <div class="step-content">
-              <h3 class="step-title">One-liner for AI Agents</h3>
-              <p class="step-desc">Paste this into your AI coding assistant (Claude, Cursor, Copilot, etc.) to install both themes automatically:</p>
-              <pre style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-top: 12px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--cyan);"># Obsidian — install to vault theme folder
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+          <h3 class="step-title" style="margin-bottom: 8px;">⚡ One-liner for AI Agents</h3>
+          <p class="step-desc" style="margin-bottom: 20px;">Paste this into your AI coding assistant (Claude, Cursor, Copilot, etc.) to install both themes automatically:</p>
+          <pre style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; text-align: left;"><code style="color: var(--cyan);"># Obsidian — install to vault theme folder
 VAULT="$(find ~/Library/Application\ Support/obsidian -name '.obsidian' -maxdepth 3 2>/dev/null | head -1)" && \
 mkdir -p "$VAULT/themes/OpenCode" && \
 curl -sL https://raw.githubusercontent.com/nxxxsooo/obsidian-opencode-theme/main/theme.css -o "$VAULT/themes/OpenCode/theme.css" && \
@@ -1663,9 +1660,7 @@ TYPORA_THEMES="$(find ~/Library/Application\ Support/abnerworks.Typora/themes -m
 [ -n "$TYPORA_THEMES" ] && \
 curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/typora/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
 echo "✅ Typora OpenCode theme installed"</code></pre>
-              <p class="step-desc" style="margin-top: 12px; color: var(--text-muted); font-size: 0.85rem;">macOS paths shown. On Linux/Windows, adjust the vault/theme folder paths accordingly.</p>
-            </div>
-          </div>
+          <p style="margin-top: 14px; color: var(--text-muted); font-size: 0.85rem;">macOS paths shown. On Linux/Windows, adjust the vault/theme folder paths accordingly.</p>
         </div>
       </div>
 
