@@ -30,7 +30,7 @@ OpenCode Themes bring the terminal to your writing tools — deep blacks, precis
 | Editor | Status | Source |
 |--------|--------|--------|
 | <img src="https://img.shields.io/badge/Obsidian-d19af8?style=flat-square&logo=obsidian&logoColor=white" /> | ✅ Published to Community Themes | [`obsidian/`](obsidian/) · [Standalone Repo](https://github.com/nxxxsooo/obsidian-opencode-theme) |
-| <img src="https://img.shields.io/badge/Typora-5fd4bb?style=flat-square" /> | ✅ Ready | [`typora/`](typora/) · [Standalone Repo](https://github.com/nxxxsooo/typora-opencode-theme) |
+| <img src="https://img.shields.io/badge/Typora-5fd4bb?style=flat-square" /> | ✅ Ready | [`typora/`](typora/) |
 
 ---
 
@@ -112,7 +112,7 @@ echo "✅ Obsidian OpenCode theme installed"
 # Typora
 TYPORA_THEMES="$(find ~/Library/Application\ Support/abnerworks.Typora/themes -maxdepth 0 2>/dev/null || echo '')" && \
 [ -n "$TYPORA_THEMES" ] && \
-curl -sL https://raw.githubusercontent.com/nxxxsooo/typora-opencode-theme/main/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/typora/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
 echo "✅ Typora OpenCode theme installed"
 ```
 
