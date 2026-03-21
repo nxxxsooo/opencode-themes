@@ -214,7 +214,7 @@ body {
   --font-interface-theme: "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-text-theme: "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-monospace-theme: "JetBrains Mono", "PingFang SC", monospace;
-  --file-line-width: 85vw;
+  --file-line-width: 900px;
 
   --font-ui-smaller: 14px;
   --font-ui-small: 15px;
@@ -614,4 +614,16 @@ body {
 .theme-dark .markdown-preview-view .task-list-item.is-checked {
   color: var(--checklist-done-color);
   text-decoration: var(--checklist-done-decoration);
+}
+
+/* Readable line length: constrain width when enabled */
+.is-readable-line-width .markdown-source-view.mod-cm6 .cm-sizer,
+.is-readable-line-width .markdown-preview-sizer {
+  max-width: 80vw !important;
+  margin: 0 auto !important;
+}
+
+/* Full width when readable line length is off */
+.markdown-source-view.mod-cm6 .cm-contentContainer {
+  max-width: 100% !important;
 }
