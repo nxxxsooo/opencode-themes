@@ -237,7 +237,7 @@ body {
   --font-interface-theme: "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-text-theme: "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-monospace-theme: "JetBrains Mono", "PingFang SC", monospace;
-  --file-line-width: 900px;
+  --file-line-width: clamp(500px, 65vw, 1000px);
 
   --font-ui-smaller: 14px;
   --font-ui-small: 15px;
@@ -644,7 +644,7 @@ body {
 /* Readable line length */
 .is-readable-line-width .markdown-source-view.mod-cm6 .cm-sizer,
 .is-readable-line-width .markdown-preview-sizer {
-  max-width: 80vw !important;
+  max-width: clamp(500px, 65vw, 1000px) !important;
   margin: 0 auto !important;
 }
 
