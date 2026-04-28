@@ -5,7 +5,7 @@
 <h1 align="center">OpenCode Themes</h1>
 
 <p align="center">
-  <strong>Terminal-inspired dark themes for <a href="https://obsidian.md">Obsidian</a> and <a href="https://typora.io">Typora</a>.</strong><br/>
+  <strong>Terminal-inspired dark themes for <a href="https://obsidian.md">Obsidian</a>, <a href="https://typora.io">Typora</a>, and <a href="https://ghostty.org">Ghostty</a>.</strong><br/>
   Deep blacks · Precise contrast · Built for focus.
 </p>
 
@@ -31,6 +31,7 @@ OpenCode Themes bring the terminal to your writing tools — deep blacks, precis
 |--------|--------|--------|
 | <img src="https://img.shields.io/badge/Obsidian-d19af8?style=flat-square&logo=obsidian&logoColor=white" /> | ✅ Published to Community Themes | [`obsidian/`](obsidian/) · [Standalone Repo](https://github.com/nxxxsooo/obsidian-opencode-theme) |
 | <img src="https://img.shields.io/badge/Typora-5fd4bb?style=flat-square" /> | ✅ Ready | [`typora/`](typora/) |
+| <img src="https://img.shields.io/badge/Ghostty-fab283?style=flat-square" /> | ✅ Ready | [`ghostty/`](ghostty/) |
 
 ---
 
@@ -38,17 +39,17 @@ OpenCode Themes bring the terminal to your writing tools — deep blacks, precis
 
 | | Element | Hex | Role |
 |---|---------|-----|------|
-| 🟣 | **Primary Accent** | `#8a6cc4` | Links, interactive elements |
-| 🟪 | **Purple** | `#d19af8` | Headings, keywords |
-| 🟢 | **Cyan** | `#5fd4bb` | Tags, properties, strings |
-| 🟡 | **Gold** | `#f0a830` | Bold text, highlights |
-| 🔴 | **Red** | `#ff8299` | Errors, deletions |
-| 🔵 | **Blue** | `#7aa2f7` | Selections, focused states |
-| 🟩 | **Green** | `#9ece6a` | Strings, success |
-| 🟠 | **Orange** | `#ff9e64` | Values, numbers |
-| 🩵 | **Sky** | `#89ddff` | Operators |
-| ⬛ | **Background** | `#0d1117` | Deep black base |
-| ⬜ | **Text** | `#f0f6fc` | High contrast foreground |
+| 🟠 | **Primary / Cursor** | `#fab283` | Links, cursor, primary actions |
+| 🟣 | **Accent** | `#9d7cd8` | Headings, keywords |
+| 🔵 | **Secondary** | `#5c9cf5` | Lists, focused states |
+| 🟢 | **Green** | `#7fd88f` | Strings, success |
+| 🟡 | **Yellow** | `#e5c07b` | Emphasis, warnings |
+| 🟠 | **Orange** | `#f5a742` | Strong text, numbers |
+| 🔴 | **Red** | `#e06c75` | Errors, deletions |
+| 🩵 | **Cyan** | `#56b6c2` | Operators, tags, info |
+| ⬛ | **Background** | `#0a0a0a` | Deep black base |
+| ◼️ | **Panel** | `#141414` | Secondary surfaces |
+| ⬜ | **Text** | `#eeeeee` | High contrast foreground |
 
 ---
 
@@ -58,7 +59,7 @@ OpenCode Themes bring the terminal to your writing tools — deep blacks, precis
 Color scheme derived from OpenCode/Ghostty terminal — feels native to developers.
 
 #### 👁️ High Contrast
-`#f0f6fc` on `#0d1117` — optimized for readability in dark environments.
+`#eeeeee` on `#0a0a0a` — optimized for readability in dark environments.
 
 #### 📝 Full Syntax Highlighting
 Complete token coverage — keywords, strings, functions, properties, operators all precisely colored.
@@ -99,6 +100,20 @@ PingFang SC / Noto Sans SC for beautiful Chinese/Japanese/Korean text.
 3. Copy `opencode.css` into the theme folder
 4. Restart Typora and select **OpenCode** from the theme menu
 
+### Ghostty
+
+1. Download [`OpenCode`](ghostty/OpenCode)
+2. Copy it into your Ghostty user themes folder:
+   ```bash
+   mkdir -p ~/.config/ghostty/themes
+   cp OpenCode ~/.config/ghostty/themes/OpenCode
+   ```
+3. Add this to `~/.config/ghostty/config`:
+   ```conf
+   theme = dark:OpenCode,light:Aura
+   ```
+4. Reload Ghostty with `Cmd + Shift + ,` or restart it.
+
 ### 🤖 For AI Agents (One-liner)
 
 ```bash
@@ -114,6 +129,14 @@ TYPORA_THEMES="$(find ~/Library/Application\ Support/abnerworks.Typora/themes -m
 [ -n "$TYPORA_THEMES" ] && \
 curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/typora/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
 echo "✅ Typora OpenCode theme installed"
+
+# Ghostty
+mkdir -p "$HOME/.config/ghostty/themes" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/ghostty/OpenCode -o "$HOME/.config/ghostty/themes/OpenCode" && \
+grep -q '^theme = ' "$HOME/.config/ghostty/config" 2>/dev/null \
+  && perl -0pi -e 's/^theme = .*$/theme = dark:OpenCode,light:Aura/m' "$HOME/.config/ghostty/config" \
+  || printf '\ntheme = dark:OpenCode,light:Aura\n' >> "$HOME/.config/ghostty/config" && \
+echo "✅ Ghostty OpenCode theme installed"
 ```
 
 > macOS paths shown. On Linux/Windows, adjust vault/theme folder paths accordingly.
@@ -143,6 +166,8 @@ opencode-themes/
 ├── typora/             # Typora theme
 │   ├── opencode.css    # Main theme stylesheet
 │   └── opencode/       # Asset folder (fonts/images)
+├── ghostty/            # Ghostty terminal theme
+│   └── OpenCode        # Ghostty user theme file
 ├── website/            # Landing page
 │   └── index.html      # Static site for GitHub Pages
 └── README.md
