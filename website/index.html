@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="OpenCode Themes — Terminal-inspired dark themes for Obsidian and Typora. Tokyo Night palette meets terminal aesthetics across your writing tools.">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="description" content="OpenCode Themes — Terminal-inspired dark themes for Obsidian, Typora, and Ghostty. OpenCode TUI palette meets terminal aesthetics across your writing tools.">
+  <meta name="theme-color" content="#0a0a0a">
   <title>OpenCode Themes</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23a3e635'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='url(%23bg)'/%3E%3Cpath d='M8 13 A8 8 0 0 1 24 13' fill='none' stroke='%231a1a2e' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='12.5' cy='18' r='3.5' fill='none' stroke='%231a1a2e' stroke-width='2'/%3E%3Ccircle cx='19.5' cy='18' r='3.5' fill='none' stroke='%231a1a2e' stroke-width='2'/%3E%3Cline x1='16' y1='18' x2='16' y2='18' stroke='%231a1a2e' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 
@@ -18,32 +18,32 @@
        Design Tokens (from opencode.css)
        ============================================================ */
     :root {
-      --bg-primary: #0d1117;
-      --bg-secondary: #161b22;
-      --bg-tertiary: #1c2128;
-      --bg-elevated: #21262d;
-      --border: #30363d;
-      --border-hover: #484f58;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1e1e1e;
+      --bg-elevated: #282828;
+      --border: #484848;
+      --border-hover: #606060;
       
-      --text: #f0f6fc;
-      --text-secondary: #e6edf3;
-      --text-muted: #9ca3af;
-      --text-faint: #7c838d;
+      --text: #eeeeee;
+      --text-secondary: #eeeeee;
+      --text-muted: #808080;
+      --text-faint: #606060;
       
-      --accent: #8a6cc4;
-      --accent-hover: #9b80d1;
-      --accent-rgb: 138, 108, 196;
+      --accent: #fab283;
+      --accent-hover: #ffc09f;
+      --accent-rgb: 250, 178, 131;
       
-      --purple: #d19af8;
-      --cyan: #5fd4bb;
-      --blue: #7aa2f7;
-      --green: #9ece6a;
-      --yellow: #e0af68;
-      --orange: #ff9e64;
-      --red: #f7768e;
-      --pink: #ff79c6;
-      --sky: #89ddff;
-      --gold: #e5a030;
+      --purple: #9d7cd8;
+      --cyan: #56b6c2;
+      --blue: #5c9cf5;
+      --green: #7fd88f;
+      --yellow: #e5c07b;
+      --orange: #f5a742;
+      --red: #e06c75;
+      --pink: #e06c75;
+      --sky: #56b6c2;
+      --gold: #fab283;
       
       --radius-s: 4px;
       --radius-m: 8px;
@@ -101,7 +101,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(138, 108, 196, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(250, 178, 131, 0.15) 0%, transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
@@ -258,7 +258,7 @@
     .btn-primary:hover {
       background: var(--accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(138, 108, 196, 0.3);
+      box-shadow: 0 8px 24px rgba(250, 178, 131, 0.3);
     }
     
     .btn-secondary {
@@ -1126,10 +1126,10 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <span class="hero-badge">✨ Available for Obsidian &amp; Typora</span>
+      <span class="hero-badge">✨ Available for Obsidian, Typora &amp; Ghostty</span>
       <h1 class="hero-title">OpenCode Themes</h1>
-      <p class="hero-subtitle">A terminal-inspired dark theme for your writing tools</p>
-      <p class="hero-tagline">Tokyo Night palette meets terminal aesthetics. Available for both Obsidian and Typora editors.</p>
+      <p class="hero-subtitle">OpenCode palette for your editors and terminal</p>
+      <p class="hero-tagline">OpenCode TUI palette meets terminal aesthetics. Now available for Obsidian, Typora, and Ghostty.</p>
       
       <div class="hero-cta">
         <a href="https://github.com/nxxxsooo/obsidian-opencode-theme" class="btn btn-primary" target="_blank" rel="noopener">
@@ -1143,6 +1143,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           Download for Typora
+        </a>
+        <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/ghostty" class="btn btn-secondary" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
+          </svg>
+          Download for Ghostty
         </a>
         <a href="https://github.com/nxxxsooo/opencode-themes" class="btn btn-secondary" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -1175,6 +1181,12 @@
           <div class="terminal-output" style="color: var(--purple);">✓ Typora theme installed</div>
           <div class="terminal-line">
             <span class="terminal-prompt">➜</span>
+            <span class="terminal-command">opencode-theme install ghostty<span class="cursor"></span></span>
+          </div>
+          <div class="terminal-output">Installing OpenCode for Ghostty...</div>
+          <div class="terminal-output" style="color: var(--primary, var(--accent));">✓ Ghostty theme installed</div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">➜</span>
             <span class="terminal-command">opencode-theme preview<span class="cursor"></span></span>
           </div>
         </div>
@@ -1186,7 +1198,7 @@
   <section id="editors" class="editors">
     <div class="section-container">
       <div class="section-header fade-in">
-        <span class="section-label">Choose Your Editor</span>
+        <span class="section-label">Choose Your Surface</span>
         <h2 class="section-title">Available For</h2>
       </div>
       
@@ -1241,6 +1253,29 @@
             </a>
           </div>
         </div>
+        
+        <!-- Ghostty Card -->
+        <div class="editor-card">
+          <div class="editor-icon typora">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10l3 2-3 2m6 0h3" />
+            </svg>
+          </div>
+          <h3 class="editor-title">Ghostty</h3>
+          <p class="editor-desc">A fast native terminal for macOS and Linux. The OpenCode theme maps the official TUI palette to Ghostty's background, foreground, cursor, selection, and ANSI colors.</p>
+          <div class="editor-links">
+            <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/ghostty" class="btn btn-primary" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download
+            </a>
+            <a href="https://github.com/nxxxsooo/opencode-themes" class="btn btn-secondary" target="_blank" rel="noopener">
+              GitHub
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1256,6 +1291,7 @@
       <div class="preview-tabs">
         <button class="preview-tab active" data-tab="obsidian">Obsidian</button>
         <button class="preview-tab" data-tab="typora">Typora</button>
+        <button class="preview-tab" data-tab="ghostty">Ghostty</button>
       </div>
       
       <!-- Obsidian Preview -->
@@ -1292,14 +1328,14 @@
             </div>
             <div class="markdown-preview">
               <h1>OpenCode Theme</h1>
-              <p>A <strong>terminal-inspired dark theme</strong> for Obsidian. Features the <em>Tokyo Night</em> color palette with meticulous attention to detail.</p>
+              <p>A <strong>terminal-inspired dark theme</strong> for Obsidian. Features the official <em>OpenCode TUI</em> palette with meticulous attention to detail.</p>
               
               <h2>Code Highlighting</h2>
               <pre><code><span class="sh-keyword">const</span> <span class="sh-function">greeting</span> = <span class="sh-string">"Hello, OpenCode!"</span>;
 <span class="sh-keyword">const</span> colors = {
-  <span class="sh-property">purple</span>: <span class="sh-string">"#d19af8"</span>,
-  <span class="sh-property">gold</span>: <span class="sh-string">"#e5a030"</span>,
-  <span class="sh-property">cyan</span>: <span class="sh-string">"#5fd4bb"</span>
+  <span class="sh-property">purple</span>: <span class="sh-string">"#9d7cd8"</span>,
+  <span class="sh-property">gold</span>: <span class="sh-string">"#fab283"</span>,
+  <span class="sh-property">cyan</span>: <span class="sh-string">"#56b6c2"</span>
 };
 
 <span class="sh-comment">// Terminal aesthetics meet knowledge management</span>
@@ -1339,7 +1375,7 @@
               
               <h2>Key Features</h2>
               <ul>
-                <li><strong>Tokyo Night palette</strong> — Carefully curated colors</li>
+                <li><strong>OpenCode palette</strong> — Synced with the official TUI colors</li>
                 <li><strong>JetBrains Mono</strong> — Optimized code font</li>
                 <li><strong>Full coverage</strong> — Every UI element styled</li>
               </ul>
@@ -1362,14 +1398,14 @@
           <div class="editor-content">
             <div class="markdown-preview">
               <h1>OpenCode Theme</h1>
-              <p>A <strong>terminal-inspired dark theme</strong> for Typora, ported from the popular Obsidian theme. Features the <em>Tokyo Night</em> color palette with meticulous attention to detail.</p>
+              <p>A <strong>terminal-inspired dark theme</strong> for Typora, synced with the Obsidian and Ghostty variants. Features the official <em>OpenCode TUI</em> palette with meticulous attention to detail.</p>
               
               <h2>Code Highlighting</h2>
               <pre><code><span class="sh-keyword">const</span> <span class="sh-function">greeting</span> = <span class="sh-string">"Hello, OpenCode!"</span>;
 <span class="sh-keyword">const</span> colors = {
-  <span class="sh-property">purple</span>: <span class="sh-string">"#d19af8"</span>,
-  <span class="sh-property">gold</span>: <span class="sh-string">"#e5a030"</span>,
-  <span class="sh-property">cyan</span>: <span class="sh-string">"#5fd4bb"</span>
+  <span class="sh-property">purple</span>: <span class="sh-string">"#9d7cd8"</span>,
+  <span class="sh-property">gold</span>: <span class="sh-string">"#fab283"</span>,
+  <span class="sh-property">cyan</span>: <span class="sh-string">"#56b6c2"</span>
 };
 
 <span class="sh-comment">// Terminal aesthetics meet writing elegance</span>
@@ -1409,9 +1445,37 @@
               
               <h2>Key Features</h2>
               <ul>
-                <li><strong>Tokyo Night palette</strong> — Carefully curated colors</li>
+                <li><strong>OpenCode palette</strong> — Synced with the official TUI colors</li>
                 <li><strong>JetBrains Mono</strong> — Optimized code font</li>
                 <li><strong>Full coverage</strong> — Every UI element styled</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Ghostty Preview -->
+      <div class="preview-content" id="preview-ghostty">
+        <div class="editor-mockup fade-in">
+          <div class="editor-titlebar">
+            <div class="editor-dots"><div class="editor-dot"></div><div class="editor-dot"></div><div class="editor-dot"></div></div>
+            <span class="editor-title">ghostty — OpenCode</span>
+          </div>
+          <div class="editor-content">
+            <div class="markdown-preview">
+              <h1>Ghostty OpenCode</h1>
+              <p><strong>Terminal colors synced to OpenCode.</strong> Deep black background, warm orange cursor, and ANSI colors mapped to the official TUI palette.</p>
+              <pre><code><span class="sh-comment"># ~/.config/ghostty/config</span>
+theme = dark:OpenCode,light:Aura
+
+<span class="sh-comment"># ~/.config/ghostty/themes/OpenCode</span>
+background = <span class="sh-string">#0a0a0a</span>
+foreground = <span class="sh-string">#eeeeee</span>
+cursor-color = <span class="sh-string">#fab283</span></code></pre>
+              <h2>ANSI Mapping</h2>
+              <ul>
+                <li><strong>Primary</strong> — #fab283 cursor and actions</li>
+                <li><strong>Secondary</strong> — #5c9cf5 blue terminal accents</li>
+                <li><strong>Accent</strong> — #9d7cd8 purple syntax color</li>
               </ul>
             </div>
           </div>
@@ -1435,8 +1499,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
             </svg>
           </div>
-          <h3 class="feature-title">Tokyo Night Palette</h3>
-          <p class="feature-desc">Carefully curated dark color scheme inspired by Tokyo Night. Easy on the eyes during long writing sessions.</p>
+          <h3 class="feature-title">OpenCode TUI Palette</h3>
+          <p class="feature-desc">Official OpenCode dark palette with warm orange, purple, blue, cyan, and deep black surfaces.</p>
         </div>
         
         <div class="feature-card">
@@ -1456,7 +1520,7 @@
             </svg>
           </div>
           <h3 class="feature-title">Full Coverage</h3>
-          <p class="feature-desc">Sidebars, modals, menus, source mode — every corner of your editor is styled with consistency.</p>
+          <p class="feature-desc">Editors, terminal palettes, sidebars, modals, menus, and source mode share one consistent OpenCode language.</p>
         </div>
         
         <div class="feature-card">
@@ -1482,74 +1546,74 @@
       
       <div class="colors-grid">
         <div class="color-swatch">
-          <div class="color-preview" style="background: #0d1117;"></div>
+          <div class="color-preview" style="background: #0a0a0a;"></div>
           <div class="color-info">
             <div class="color-name">Background</div>
-            <div class="color-hex">#0d1117</div>
+            <div class="color-hex">#0a0a0a</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #161b22;"></div>
+          <div class="color-preview" style="background: #141414;"></div>
           <div class="color-info">
             <div class="color-name">Secondary</div>
-            <div class="color-hex">#161b22</div>
+            <div class="color-hex">#141414</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #d19af8;"></div>
+          <div class="color-preview" style="background: #9d7cd8;"></div>
           <div class="color-info">
             <div class="color-name">Purple</div>
-            <div class="color-hex">#d19af8</div>
+            <div class="color-hex">#9d7cd8</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #e5a030;"></div>
+          <div class="color-preview" style="background: #fab283;"></div>
           <div class="color-info">
             <div class="color-name">Gold</div>
-            <div class="color-hex">#e5a030</div>
+            <div class="color-hex">#fab283</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #5fd4bb;"></div>
+          <div class="color-preview" style="background: #56b6c2;"></div>
           <div class="color-info">
             <div class="color-name">Cyan</div>
-            <div class="color-hex">#5fd4bb</div>
+            <div class="color-hex">#56b6c2</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #7aa2f7;"></div>
+          <div class="color-preview" style="background: #5c9cf5;"></div>
           <div class="color-info">
             <div class="color-name">Blue</div>
-            <div class="color-hex">#7aa2f7</div>
+            <div class="color-hex">#5c9cf5</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #9ece6a;"></div>
+          <div class="color-preview" style="background: #7fd88f;"></div>
           <div class="color-info">
             <div class="color-name">Green</div>
-            <div class="color-hex">#9ece6a</div>
+            <div class="color-hex">#7fd88f</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #f7768e;"></div>
+          <div class="color-preview" style="background: #e06c75;"></div>
           <div class="color-info">
             <div class="color-name">Red</div>
-            <div class="color-hex">#f7768e</div>
+            <div class="color-hex">#e06c75</div>
           </div>
         </div>
         
         <div class="color-swatch">
-          <div class="color-preview" style="background: #89ddff;"></div>
+          <div class="color-preview" style="background: #56b6c2;"></div>
           <div class="color-info">
             <div class="color-name">Sky</div>
-            <div class="color-hex">#89ddff</div>
+            <div class="color-hex">#56b6c2</div>
           </div>
         </div>
       </div>
@@ -1567,6 +1631,7 @@
       <div class="install-tabs">
         <button class="install-tab active" data-tab="obsidian">Obsidian</button>
         <button class="install-tab" data-tab="typora">Typora</button>
+        <button class="install-tab" data-tab="ghostty">Ghostty</button>
         <button class="install-tab" data-tab="agent">🤖 AI Agent</button>
       </div>
       
@@ -1643,11 +1708,21 @@
           </div>
         </div>
       </div>
+
+      <!-- Ghostty Installation -->
+      <div class="install-content" id="install-ghostty">
+        <div class="steps">
+          <div class="step"><div class="step-number">1</div><div class="step-content"><h3 class="step-title">Download the Theme</h3><p class="step-desc">Get <code>OpenCode</code> from the <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/ghostty" target="_blank" rel="noopener">Ghostty folder</a>.</p></div></div>
+          <div class="step"><div class="step-number">2</div><div class="step-content"><h3 class="step-title">Copy to User Themes</h3><p class="step-desc"><code>mkdir -p ~/.config/ghostty/themes && cp OpenCode ~/.config/ghostty/themes/OpenCode</code></p></div></div>
+          <div class="step"><div class="step-number">3</div><div class="step-content"><h3 class="step-title">Activate in Config</h3><p class="step-desc">Add <code>theme = dark:OpenCode,light:Aura</code> to <code>~/.config/ghostty/config</code>.</p></div></div>
+          <div class="step"><div class="step-number">4</div><div class="step-content"><h3 class="step-title">Reload Ghostty</h3><p class="step-desc">Press <strong>Cmd + Shift + ,</strong> or restart Ghostty.</p></div></div>
+        </div>
+      </div>
       <!-- AI Agent Installation -->
       <div class="install-content" id="install-agent">
         <div style="max-width: 900px; margin: 0 auto; text-align: center;">
           <h3 class="step-title" style="margin-bottom: 8px;">⚡ One-liner for AI Agents</h3>
-          <p class="step-desc" style="margin-bottom: 20px;">Paste this into your AI coding assistant (Claude, Cursor, Copilot, etc.) to install both themes automatically:</p>
+          <p class="step-desc" style="margin-bottom: 20px;">Paste this into your AI coding assistant (Claude, Cursor, Copilot, etc.) to install all OpenCode themes automatically:</p>
           <pre style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; text-align: left; white-space: pre-wrap; word-break: break-all;"><code style="color: var(--cyan);"># Obsidian — install to vault theme folder
 VAULT="$(find ~/Library/Application\ Support/obsidian -name '.obsidian' -maxdepth 3 2>/dev/null | head -1)" && \
 mkdir -p "$VAULT/themes/OpenCode" && \
@@ -1659,7 +1734,15 @@ echo "✅ Obsidian OpenCode theme installed"
 TYPORA_THEMES="$(find ~/Library/Application\ Support/abnerworks.Typora/themes -maxdepth 0 2>/dev/null || echo '')" && \
 [ -n "$TYPORA_THEMES" ] && \
 curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/typora/opencode.css -o "$TYPORA_THEMES/opencode.css" && \
-echo "✅ Typora OpenCode theme installed"</code></pre>
+echo "✅ Typora OpenCode theme installed"
+
+# Ghostty — install to user theme folder
+mkdir -p "$HOME/.config/ghostty/themes" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/ghostty/OpenCode -o "$HOME/.config/ghostty/themes/OpenCode" && \
+grep -q '^theme = ' "$HOME/.config/ghostty/config" 2>/dev/null \
+  && perl -0pi -e 's/^theme = .*$/theme = dark:OpenCode,light:Aura/m' "$HOME/.config/ghostty/config" \
+  || printf '\ntheme = dark:OpenCode,light:Aura\n' >> "$HOME/.config/ghostty/config" && \
+echo "✅ Ghostty OpenCode theme installed"</code></pre>
           <p style="margin-top: 14px; color: var(--text-muted); font-size: 0.85rem;">macOS paths shown. On Linux/Windows, adjust the vault/theme folder paths accordingly.</p>
         </div>
       </div>
@@ -1678,6 +1761,7 @@ echo "✅ Typora OpenCode theme installed"</code></pre>
         <li><a href="https://github.com/nxxxsooo/opencode-themes" target="_blank" rel="noopener">Monorepo</a></li>
         <li><a href="https://github.com/nxxxsooo/obsidian-opencode-theme" target="_blank" rel="noopener">Obsidian</a></li>
         <li><a href="https://github.com/nxxxsooo/opencode-themes/tree/main/typora" target="_blank" rel="noopener">Typora</a></li>
+        <li><a href="https://github.com/nxxxsooo/opencode-themes/tree/main/ghostty" target="_blank" rel="noopener">Ghostty</a></li>
       </ul>
     </div>
   </footer>
