@@ -1,0 +1,33 @@
+# OpenCode theme for Ghostty
+# Maps Ghostty's terminal-level colors to OpenCode TUI's built-in opencode.json dark palette.
+# Source: packages/opencode/src/cli/cmd/tui/context/theme/opencode.json
+# Note: Ghostty cannot represent OpenCode semantic fields such as diff/markdown/syntax panels 1:1.
+
+background = #0a0a0a
+foreground = #eeeeee
+
+selection-background = #323232
+selection-foreground = #eeeeee
+
+cursor-color = #fab283
+cursor-text = #0a0a0a
+
+palette = 0=#0a0a0a
+palette = 1=#e06c75
+palette = 2=#7fd88f
+palette = 3=#e5c07b
+palette = 4=#5c9cf5
+palette = 5=#9d7cd8
+palette = 6=#56b6c2
+palette = 7=#eeeeee
+palette = 8=#808080
+palette = 9=#e06c75
+palette = 10=#7fd88f
+palette = 11=#ffc09f
+palette = 12=#5c9cf5
+palette = 13=#9d7cd8
+palette = 14=#56b6c2
+palette = 15=#ffffff
+
+bold-color = #ffffff
+split-divider-color = #484848
