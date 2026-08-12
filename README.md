@@ -5,7 +5,7 @@
 <h1 align="center">OpenCode Themes</h1>
 
 <p align="center">
-  <strong>Terminal-inspired dark themes for <a href="https://obsidian.md">Obsidian</a>, <a href="https://typora.io">Typora</a>, and <a href="https://ghostty.org">Ghostty</a>.</strong><br/>
+  <strong>Terminal-inspired dark themes for <a href="https://obsidian.md">Obsidian</a>, <a href="https://typora.io">Typora</a>, <a href="https://ghostty.org">Ghostty</a>, and <a href="https://github.com/earendil-works/pi">Pi</a>.</strong><br/>
   Deep blacks · Precise contrast · Built for focus.
 </p>
 
@@ -32,6 +32,7 @@ OpenCode Themes bring the terminal to your writing tools — deep blacks, precis
 | <img src="https://img.shields.io/badge/Obsidian-d19af8?style=flat-square&logo=obsidian&logoColor=white" /> | ✅ Published to Community Themes | [`obsidian/`](obsidian/) · [Standalone Repo](https://github.com/nxxxsooo/obsidian-opencode-theme) |
 | <img src="https://img.shields.io/badge/Typora-5fd4bb?style=flat-square" /> | ✅ Ready | [`typora/`](typora/) |
 | <img src="https://img.shields.io/badge/Ghostty-fab283?style=flat-square" /> | ✅ Ready | [`ghostty/`](ghostty/) |
+| <img src="https://img.shields.io/badge/Pi-5c9cf5?style=flat-square" /> | ✅ Ready | [`pi/`](pi/) |
 
 ---
 
@@ -114,6 +115,22 @@ PingFang SC / Noto Sans SC for beautiful Chinese/Japanese/Korean text.
    ```
 4. Reload Ghostty with `Cmd + Shift + ,` or restart it.
 
+### Pi
+
+1. Download [`opencode.json`](pi/opencode.json)
+2. Copy it into Pi's global themes folder:
+   ```bash
+   mkdir -p ~/.pi/agent/themes
+   cp opencode.json ~/.pi/agent/themes/opencode.json
+   ```
+3. Open `/settings` in Pi and select `opencode`, or set `"theme": "opencode"` in `~/.pi/agent/settings.json`
+
+To try it without installing:
+
+```bash
+pi --theme ./pi/opencode.json
+```
+
 ### 🤖 For AI Agents (One-liner)
 
 ```bash
@@ -137,6 +154,11 @@ grep -q '^theme = ' "$HOME/.config/ghostty/config" 2>/dev/null \
   && perl -0pi -e 's/^theme = .*$/theme = dark:OpenCode,light:Aura/m' "$HOME/.config/ghostty/config" \
   || printf '\ntheme = dark:OpenCode,light:Aura\n' >> "$HOME/.config/ghostty/config" && \
 echo "✅ Ghostty OpenCode theme installed"
+
+# Pi
+mkdir -p "$HOME/.pi/agent/themes" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/pi/opencode.json -o "$HOME/.pi/agent/themes/opencode.json" && \
+echo "✅ Pi OpenCode theme installed — select opencode in /settings"
 ```
 
 > macOS paths shown. On Linux/Windows, adjust vault/theme folder paths accordingly.
@@ -168,6 +190,8 @@ opencode-themes/
 │   └── opencode/       # Asset folder (fonts/images)
 ├── ghostty/            # Ghostty terminal theme
 │   └── OpenCode        # Ghostty user theme file
+├── pi/                 # Pi coding agent theme
+│   └── opencode.json   # Complete Pi TUI color mapping
 ├── website/            # Landing page
 │   └── index.html      # Static site for GitHub Pages
 └── README.md
@@ -179,6 +203,7 @@ opencode-themes/
 
 - Terminal aesthetic from [OpenCode](https://github.com/sst/opencode)
 - Font rendering tuned for [Ghostty](https://ghostty.org)
+- Pi theme format from [Pi](https://github.com/earendil-works/pi)
 - README format inspired by [Bloom Theme](https://github.com/webkubor/typora-Bloom-theme)
 
 ---

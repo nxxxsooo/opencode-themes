@@ -15,6 +15,8 @@ opencode-themes/
 │   └── opencode/      # (empty, placeholder for font assets)
 ├── ghostty/           # Ghostty terminal theme
 │   └── OpenCode       # Ghostty user theme file
+├── pi/                # Pi coding agent theme
+│   └── opencode.json  # Complete Pi TUI semantic color mapping
 ├── website/           # Landing page / showcase
 └── README.md
 ```
@@ -24,6 +26,7 @@ opencode-themes/
 - `obsidian/manifest.json` — Version must match obsidian-opencode-theme
 - `typora/opencode.css` — Typora dark theme
 - `ghostty/OpenCode` — Ghostty terminal theme
+- `pi/opencode.json` — Pi coding agent TUI theme
 - CSS download URL: `https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/typora/opencode.css`
 
 ## Patterns & Conventions
@@ -32,6 +35,7 @@ opencode-themes/
 - Version bumps must happen in BOTH repos simultaneously
 - Typora theme submitted to official gallery via PR to typora/theme.typora.io (PR #460, 2026-03-23)
 - Ghostty theme can be installed to `~/.config/ghostty/themes/OpenCode` and activated via `theme = dark:OpenCode,light:Aura`
+- Pi theme can be installed to `~/.pi/agent/themes/opencode.json` and selected as `opencode` in `/settings`
 
 ## Related Repos
 - `obsidian-opencode-theme` — Obsidian community theme (required separate repo for marketplace)

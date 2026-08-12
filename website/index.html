@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="OpenCode Themes — Terminal-inspired dark themes for Obsidian, Typora, and Ghostty. OpenCode TUI palette meets terminal aesthetics across your writing tools.">
+  <meta name="description" content="OpenCode Themes — Terminal-inspired dark themes for Obsidian, Typora, Ghostty, and Pi. OpenCode TUI palette across your writing and coding tools.">
   <meta name="theme-color" content="#0a0a0a">
   <title>OpenCode Themes</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23a3e635'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='url(%23bg)'/%3E%3Cpath d='M8 13 A8 8 0 0 1 24 13' fill='none' stroke='%231a1a2e' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='12.5' cy='18' r='3.5' fill='none' stroke='%231a1a2e' stroke-width='2'/%3E%3Ccircle cx='19.5' cy='18' r='3.5' fill='none' stroke='%231a1a2e' stroke-width='2'/%3E%3Cline x1='16' y1='18' x2='16' y2='18' stroke='%231a1a2e' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -1126,10 +1126,10 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <span class="hero-badge">✨ Available for Obsidian, Typora &amp; Ghostty</span>
+      <span class="hero-badge">✨ Available for Obsidian, Typora, Ghostty &amp; Pi</span>
       <h1 class="hero-title">OpenCode Themes</h1>
-      <p class="hero-subtitle">OpenCode palette for your editors and terminal</p>
-      <p class="hero-tagline">OpenCode TUI palette meets terminal aesthetics. Now available for Obsidian, Typora, and Ghostty.</p>
+      <p class="hero-subtitle">OpenCode palette for your editors, terminal, and coding agent</p>
+      <p class="hero-tagline">OpenCode TUI palette meets terminal aesthetics. Now available for Obsidian, Typora, Ghostty, and Pi.</p>
       
       <div class="hero-cta">
         <a href="https://github.com/nxxxsooo/obsidian-opencode-theme" class="btn btn-primary" target="_blank" rel="noopener">
@@ -1149,6 +1149,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
           </svg>
           Download for Ghostty
+        </a>
+        <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/pi" class="btn btn-secondary" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
+          </svg>
+          Download for Pi
         </a>
         <a href="https://github.com/nxxxsooo/opencode-themes" class="btn btn-secondary" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -1185,6 +1191,12 @@
           </div>
           <div class="terminal-output">Installing OpenCode for Ghostty...</div>
           <div class="terminal-output" style="color: var(--primary, var(--accent));">✓ Ghostty theme installed</div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">➜</span>
+            <span class="terminal-command">opencode-theme install pi<span class="cursor"></span></span>
+          </div>
+          <div class="terminal-output">Installing OpenCode for Pi...</div>
+          <div class="terminal-output" style="color: var(--secondary, var(--cyan));">✓ Pi theme installed</div>
           <div class="terminal-line">
             <span class="terminal-prompt">➜</span>
             <span class="terminal-command">opencode-theme preview<span class="cursor"></span></span>
@@ -1274,6 +1286,22 @@
             <a href="https://github.com/nxxxsooo/opencode-themes" class="btn btn-secondary" target="_blank" rel="noopener">
               GitHub
             </a>
+          </div>
+        </div>
+
+        <!-- Pi Card -->
+        <div class="editor-card">
+          <div class="editor-icon typora">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3" />
+              <rect x="3" y="4" width="18" height="16" rx="3" />
+            </svg>
+          </div>
+          <h3 class="editor-title">Pi</h3>
+          <p class="editor-desc">A terminal-native coding agent. The theme covers Pi's complete semantic color system, including messages, tools, Markdown, diffs, syntax, and thinking levels.</p>
+          <div class="editor-links">
+            <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/pi" class="btn btn-primary" target="_blank" rel="noopener">Download</a>
+            <a href="https://github.com/earendil-works/pi" class="btn btn-secondary" target="_blank" rel="noopener">Pi</a>
           </div>
         </div>
       </div>
@@ -1632,6 +1660,7 @@ cursor-color = <span class="sh-string">#fab283</span></code></pre>
         <button class="install-tab active" data-tab="obsidian">Obsidian</button>
         <button class="install-tab" data-tab="typora">Typora</button>
         <button class="install-tab" data-tab="ghostty">Ghostty</button>
+        <button class="install-tab" data-tab="pi">Pi</button>
         <button class="install-tab" data-tab="agent">🤖 AI Agent</button>
       </div>
       
@@ -1718,6 +1747,17 @@ cursor-color = <span class="sh-string">#fab283</span></code></pre>
           <div class="step"><div class="step-number">4</div><div class="step-content"><h3 class="step-title">Reload Ghostty</h3><p class="step-desc">Press <strong>Cmd + Shift + ,</strong> or restart Ghostty.</p></div></div>
         </div>
       </div>
+
+      <!-- Pi Installation -->
+      <div class="install-content" id="install-pi">
+        <div class="steps">
+          <div class="step"><div class="step-number">1</div><div class="step-content"><h3 class="step-title">Download the Theme</h3><p class="step-desc">Get <code>opencode.json</code> from the <a href="https://github.com/nxxxsooo/opencode-themes/tree/main/pi" target="_blank" rel="noopener">Pi folder</a>.</p></div></div>
+          <div class="step"><div class="step-number">2</div><div class="step-content"><h3 class="step-title">Copy to Pi Themes</h3><p class="step-desc"><code>mkdir -p ~/.pi/agent/themes &amp;&amp; cp opencode.json ~/.pi/agent/themes/opencode.json</code></p></div></div>
+          <div class="step"><div class="step-number">3</div><div class="step-content"><h3 class="step-title">Activate</h3><p class="step-desc">Open <code>/settings</code> in Pi and select <strong>opencode</strong>.</p></div></div>
+          <div class="step"><div class="step-number">4</div><div class="step-content"><h3 class="step-title">Try Without Installing</h3><p class="step-desc">Run <code>pi --theme ./pi/opencode.json</code> from this repository.</p></div></div>
+        </div>
+      </div>
+
       <!-- AI Agent Installation -->
       <div class="install-content" id="install-agent">
         <div style="max-width: 900px; margin: 0 auto; text-align: center;">
@@ -1742,7 +1782,12 @@ curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/ghostty
 grep -q '^theme = ' "$HOME/.config/ghostty/config" 2>/dev/null \
   && perl -0pi -e 's/^theme = .*$/theme = dark:OpenCode,light:Aura/m' "$HOME/.config/ghostty/config" \
   || printf '\ntheme = dark:OpenCode,light:Aura\n' >> "$HOME/.config/ghostty/config" && \
-echo "✅ Ghostty OpenCode theme installed"</code></pre>
+echo "✅ Ghostty OpenCode theme installed"
+
+# Pi — install to global themes folder
+mkdir -p "$HOME/.pi/agent/themes" && \
+curl -sL https://raw.githubusercontent.com/nxxxsooo/opencode-themes/main/pi/opencode.json -o "$HOME/.pi/agent/themes/opencode.json" && \
+echo "✅ Pi OpenCode theme installed — select opencode in /settings"</code></pre>
           <p style="margin-top: 14px; color: var(--text-muted); font-size: 0.85rem;">macOS paths shown. On Linux/Windows, adjust the vault/theme folder paths accordingly.</p>
         </div>
       </div>
@@ -1762,6 +1807,7 @@ echo "✅ Ghostty OpenCode theme installed"</code></pre>
         <li><a href="https://github.com/nxxxsooo/obsidian-opencode-theme" target="_blank" rel="noopener">Obsidian</a></li>
         <li><a href="https://github.com/nxxxsooo/opencode-themes/tree/main/typora" target="_blank" rel="noopener">Typora</a></li>
         <li><a href="https://github.com/nxxxsooo/opencode-themes/tree/main/ghostty" target="_blank" rel="noopener">Ghostty</a></li>
+        <li><a href="https://github.com/nxxxsooo/opencode-themes/tree/main/pi" target="_blank" rel="noopener">Pi</a></li>
       </ul>
     </div>
   </footer>
